@@ -5,6 +5,9 @@
 			"guid": "00000000000000000000000000000000",
 			"description": "Default Uncontrolled Changelist",
 			"files": [
+				"E:/YEAR_2/TERM 2/TeamProject/TeamProjectWheelz/Content/Levels/Map2.umap",
+				"E:/YEAR_2/TERM 2/TeamProject/TeamProjectWheelz/Content/Materials/Map2/M_TempBase.uasset",
+				"E:/YEAR_2/TERM 2/TeamProject/TeamProjectWheelz/Content/Textures/Map2/Map2.uasset",
 				"D:/Git/TeamProject/TeamProject/TeamProjectWheelz/Content/TestStaticMesh/SM_FirstCube.uasset",
 				"D:/Git/TeamProject/TeamProject/TeamProjectWheelz/Content/__ExternalActors__/Levels/BaseLevel/7/GG/LD1OU1NEIAMEBMIZ7YL68V.uasset",
 				"D:/Git/TeamProject/TeamProject/TeamProjectWheelz/Content/TestSkelMeshes/MTL_FlatBlack.uasset",
