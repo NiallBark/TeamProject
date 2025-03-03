@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="67b4ae90-0f65-4aa0-a591-95035f248420" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_FrontWheels.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_FrontWheels.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_RearWheels.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_RearWheels.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Pawns/BP_Vehicle2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Pawns/BP_Vehicle2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intermediate/CachedAssetRegistry_0.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/CachedAssetRegistry_0.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/AutoScreenshot.png" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/AutoScreenshot.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Autosaves/Game/Pawns/BP_Vehicle2_Auto1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/Autosaves/Game/Pawns/BP_Vehicle2_Auto1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Autosaves/PackageRestoreData.json" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/Autosaves/PackageRestoreData.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-2F7628C7425B98131645D281F8200023/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-41F8201A48197918856A45A6AC78B1BB/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-4257DD924EDB9015408296A71B31D2D0/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-B21E5B7046E893C6AA2859B0F0771425/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/WindowsEditor/EditorPerProjectUserSettings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/Config/WindowsEditor/EditorPerProjectUserSettings.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz-backup-2025.02.13-11.46.44.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz-backup-2025.02.13-12.23.12.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz-backup-2025.02.18-20.03.34.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz-backup-2025.02.20-09.33.42.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz-backup-2025.02.20-11.03.58.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz.log" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz_2.log" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz_2.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/SourceControl/UncontrolledChangelists.json" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/SourceControl/UncontrolledChangelists.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Telemetry/Telemetry.json" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/Telemetry/Telemetry.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TeamProjectWheelz.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/TeamProjectWheelz.uproject" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2to1S8ksJdfXpY77jja0Pbi0FyC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Adding-cars",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="67b4ae90-0f65-4aa0-a591-95035f248420" name="Changes" comment="" />
+      <created>1741003610849</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1741003610849</updated>
+      <workItem from="1741003614033" duration="229000" />
+    </task>
+    <servers />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="VcsManagerConfiguration">
+    <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="false" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>
