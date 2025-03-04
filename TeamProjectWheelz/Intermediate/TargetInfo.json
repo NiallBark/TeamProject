@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "TeamProjectWheelz",
+			"Path": "..\\Source\\TeamProjectWheelz.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "TeamProjectWheelzEditor",
+			"Path": "..\\Source\\TeamProjectWheelzEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
