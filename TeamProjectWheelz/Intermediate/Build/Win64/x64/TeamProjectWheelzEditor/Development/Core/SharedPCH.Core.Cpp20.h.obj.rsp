@@ -1,18 +1,18 @@
-"C:\Temp\Github\TeamProject\TeamProjectWheelz\Intermediate\Build\Win64\x64\TeamProjectWheelzEditor\Development\Core\SharedPCH.Core.Cpp20.cpp"
+"A:\This PC\Desktop\Github\TeamProject\TeamProjectWheelz\Intermediate\Build\Win64\x64\TeamProjectWheelzEditor\Development\Core\SharedPCH.Core.Cpp20.cpp"
 /I "."
 /I "Runtime\Core\Public"
 /I "Runtime\Core\Internal"
 /I "Runtime\TraceLog\Public"
 /external:W0
-/external:I "C:\Program Files (x86)\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.34.31933\INCLUDE"
+/external:I "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120\INCLUDE"
 /external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt"
 /external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared"
 /external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\um"
 /external:I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\winrt"
-/Yc"C:\Temp\Github\TeamProject\TeamProjectWheelz\Intermediate\Build\Win64\x64\TeamProjectWheelzEditor\Development\Core\SharedPCH.Core.Cpp20.h"
-/Fp"C:\Temp\Github\TeamProject\TeamProjectWheelz\Intermediate\Build\Win64\x64\TeamProjectWheelzEditor\Development\Core\SharedPCH.Core.Cpp20.h.pch"
-/Fo"C:\Temp\Github\TeamProject\TeamProjectWheelz\Intermediate\Build\Win64\x64\TeamProjectWheelzEditor\Development\Core\SharedPCH.Core.Cpp20.h.obj"
-/sourceDependencies "C:\Temp\Github\TeamProject\TeamProjectWheelz\Intermediate\Build\Win64\x64\TeamProjectWheelzEditor\Development\Core\SharedPCH.Core.Cpp20.h.dep.json"
+/Yc"A:\This PC\Desktop\Github\TeamProject\TeamProjectWheelz\Intermediate\Build\Win64\x64\TeamProjectWheelzEditor\Development\Core\SharedPCH.Core.Cpp20.h"
+/Fp"A:\This PC\Desktop\Github\TeamProject\TeamProjectWheelz\Intermediate\Build\Win64\x64\TeamProjectWheelzEditor\Development\Core\SharedPCH.Core.Cpp20.h.pch"
+/Fo"A:\This PC\Desktop\Github\TeamProject\TeamProjectWheelz\Intermediate\Build\Win64\x64\TeamProjectWheelzEditor\Development\Core\SharedPCH.Core.Cpp20.h.obj"
+/sourceDependencies "A:\This PC\Desktop\Github\TeamProject\TeamProjectWheelz\Intermediate\Build\Win64\x64\TeamProjectWheelzEditor\Development\Core\SharedPCH.Core.Cpp20.h.dep.json"
 /Zc:inline
 /nologo
 /Oi
