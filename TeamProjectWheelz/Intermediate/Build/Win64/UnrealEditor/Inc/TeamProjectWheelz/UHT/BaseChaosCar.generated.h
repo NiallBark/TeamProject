@@ -14,7 +14,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define TEAMPROJECTWHEELZ_BaseChaosCar_generated_h
 
-#define FID_Git_TeamProject_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_16_INCLASS_NO_PURE_DECLS \
+#define FID_Temp_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_18_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesABaseChaosCar(); \
 	friend struct Z_Construct_UClass_ABaseChaosCar_Statics; \
@@ -23,9 +23,7 @@ public: \
 	DECLARE_SERIALIZER(ABaseChaosCar)
 
 
-#define FID_Git_TeamProject_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_16_ENHANCED_CONSTRUCTORS \
-	/** Standard constructor, called after all reflected properties have been initialized */ \
-	NO_API ABaseChaosCar(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
+#define FID_Temp_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_18_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	ABaseChaosCar(ABaseChaosCar&&); \
@@ -33,16 +31,16 @@ private: \
 public: \
 	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, ABaseChaosCar); \
 	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(ABaseChaosCar); \
-	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(ABaseChaosCar) \
+	DEFINE_DEFAULT_CONSTRUCTOR_CALL(ABaseChaosCar) \
 	NO_API virtual ~ABaseChaosCar();
 
 
-#define FID_Git_TeamProject_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_13_PROLOG
-#define FID_Git_TeamProject_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_16_GENERATED_BODY \
+#define FID_Temp_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_15_PROLOG
+#define FID_Temp_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_18_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Git_TeamProject_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_16_INCLASS_NO_PURE_DECLS \
-	FID_Git_TeamProject_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_16_ENHANCED_CONSTRUCTORS \
+	FID_Temp_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_18_INCLASS_NO_PURE_DECLS \
+	FID_Temp_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_18_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -50,7 +48,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 template<> TEAMPROJECTWHEELZ_API UClass* StaticClass<class ABaseChaosCar>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FID_Git_TeamProject_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h
+#define CURRENT_FILE_ID FID_Temp_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

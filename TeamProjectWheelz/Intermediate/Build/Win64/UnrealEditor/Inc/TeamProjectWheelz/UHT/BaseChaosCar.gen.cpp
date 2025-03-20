@@ -11,6 +11,8 @@ void EmptyLinkFunctionForGeneratedCodeBaseChaosCar() {}
 
 // Begin Cross Module References
 CHAOSVEHICLES_API UClass* Z_Construct_UClass_AWheeledVehiclePawn();
+ENGINE_API UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
+ENGINE_API UClass* Z_Construct_UClass_USpringArmComponent_NoRegister();
 TEAMPROJECTWHEELZ_API UClass* Z_Construct_UClass_ABaseChaosCar();
 TEAMPROJECTWHEELZ_API UClass* Z_Construct_UClass_ABaseChaosCar_NoRegister();
 UPackage* Z_Construct_UPackage__Script_TeamProjectWheelz();
@@ -66,10 +68,56 @@ struct Z_Construct_UClass_ABaseChaosCar_Statics
 		{ "ToolTip", "The Car's Teleport Cooldown Timer To Prevent Multiple Teleports In The Same Teleporter" },
 #endif
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CarCamera_MetaData[] = {
+		{ "Category", "Car" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Car Camera\n" },
+#endif
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "BaseChaosCar.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Car Camera" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CarSpringArm_MetaData[] = {
+		{ "Category", "Car" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Car Spring Arm\n" },
+#endif
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "BaseChaosCar.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Car Spring Arm" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DriftTimer_MetaData[] = {
+		{ "Category", "Car" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Drift Timer\n" },
+#endif
+		{ "ModuleRelativePath", "BaseChaosCar.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Drift Timer" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DriftMaxTime_MetaData[] = {
+		{ "Category", "Car" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Drift Max Time\n" },
+#endif
+		{ "ModuleRelativePath", "BaseChaosCar.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Drift Max Time" },
+#endif
+	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_TrueSpeed;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_DisplaySpeed;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_TeleportCooldownTimer;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_CarCamera;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_CarSpringArm;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_DriftTimer;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_DriftMaxTime;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -80,10 +128,18 @@ struct Z_Construct_UClass_ABaseChaosCar_Statics
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_TrueSpeed = { "TrueSpeed", nullptr, (EPropertyFlags)0x0020080000000014, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, TrueSpeed), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_TrueSpeed_MetaData), NewProp_TrueSpeed_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_DisplaySpeed = { "DisplaySpeed", nullptr, (EPropertyFlags)0x0020080000000014, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, DisplaySpeed), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DisplaySpeed_MetaData), NewProp_DisplaySpeed_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_TeleportCooldownTimer = { "TeleportCooldownTimer", nullptr, (EPropertyFlags)0x0020080000000014, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, TeleportCooldownTimer), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_TeleportCooldownTimer_MetaData), NewProp_TeleportCooldownTimer_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_CarCamera = { "CarCamera", nullptr, (EPropertyFlags)0x00200800000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, CarCamera), Z_Construct_UClass_UCameraComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CarCamera_MetaData), NewProp_CarCamera_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_CarSpringArm = { "CarSpringArm", nullptr, (EPropertyFlags)0x00200800000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, CarSpringArm), Z_Construct_UClass_USpringArmComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CarSpringArm_MetaData), NewProp_CarSpringArm_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_DriftTimer = { "DriftTimer", nullptr, (EPropertyFlags)0x0020080000000014, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, DriftTimer), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DriftTimer_MetaData), NewProp_DriftTimer_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_DriftMaxTime = { "DriftMaxTime", nullptr, (EPropertyFlags)0x0020080000000014, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, DriftMaxTime), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DriftMaxTime_MetaData), NewProp_DriftMaxTime_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ABaseChaosCar_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_TrueSpeed,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_DisplaySpeed,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_TeleportCooldownTimer,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_CarCamera,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_CarSpringArm,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_DriftTimer,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_DriftMaxTime,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ABaseChaosCar_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_ABaseChaosCar_Statics::DependentSingletons[])() = {
@@ -118,20 +174,19 @@ template<> TEAMPROJECTWHEELZ_API UClass* StaticClass<ABaseChaosCar>()
 {
 	return ABaseChaosCar::StaticClass();
 }
-ABaseChaosCar::ABaseChaosCar(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {}
 DEFINE_VTABLE_PTR_HELPER_CTOR(ABaseChaosCar);
 ABaseChaosCar::~ABaseChaosCar() {}
 // End Class ABaseChaosCar
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_Git_TeamProject_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_Statics
+struct Z_CompiledInDeferFile_FID_Temp_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ABaseChaosCar, ABaseChaosCar::StaticClass, TEXT("ABaseChaosCar"), &Z_Registration_Info_UClass_ABaseChaosCar, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ABaseChaosCar), 3643406361U) },
+		{ Z_Construct_UClass_ABaseChaosCar, ABaseChaosCar::StaticClass, TEXT("ABaseChaosCar"), &Z_Registration_Info_UClass_ABaseChaosCar, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ABaseChaosCar), 224854434U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Git_TeamProject_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_1678136858(TEXT("/Script/TeamProjectWheelz"),
-	Z_CompiledInDeferFile_FID_Git_TeamProject_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Git_TeamProject_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Temp_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_3249154136(TEXT("/Script/TeamProjectWheelz"),
+	Z_CompiledInDeferFile_FID_Temp_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Temp_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration
