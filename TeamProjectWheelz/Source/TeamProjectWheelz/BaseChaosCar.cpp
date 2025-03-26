@@ -72,11 +72,8 @@ void ABaseChaosCar::Drift()
 {
 	bIsDrifting = true;
 	CurrentFriction = DriftFriction;
-    if (DriftTimer < DriftMaxTime)
-    {
-        DriftTimer += GetWorld()->GetDeltaSeconds() * (7.5 * (DefaultFriction - DriftFriction));
-    }
-    else
+	UE_LOG(LogTemp, Warning, TEXT("DriftTimer: %f"), DriftTimer);
+	if (DriftTimer >= DriftMaxTime)
     {
 		DriftTimer = DriftMaxTime;
     }
@@ -86,10 +83,15 @@ void ABaseChaosCar::StopDrift()
 {
 	bIsDrifting = false;
     // Apply forward force to the car
-    FVector ForwardForce = GetActorForwardVector() * 1000000.f * DriftTimer;
-    //GetVehicleMovement()->AddForce(ForwardForce);
+    FVector ForwardForce = GetActorForwardVector() * 500.0f * (DriftTimer - DisplaySpeed);
+	// Create A Pointer To The Root Component
+	UPrimitiveComponent* CarRoot = Cast<UPrimitiveComponent>(GetRootComponent());
+	// Add Impulse To The Car
+	CarRoot->AddImpulse(ForwardForce, NAME_None, true);
+
     DriftTimer = 0.f;
 }
+
 void ABaseChaosCar::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
@@ -110,9 +112,25 @@ void ABaseChaosCar::Tick(float DeltaTime)
             CurrentFriction = DefaultFriction;
 		}
     }
+    else
+    {
+        if (DriftTimer < DriftMaxTime)
+        {
+            DriftTimer += DeltaTime * (30 * (DefaultFriction - DriftFriction));
+        }
+		else
+		{
+			DriftTimer = DriftMaxTime;
+		}
+    }
 
-	// Debug Friction
-	UE_LOG(LogTemp, Warning, TEXT("Current Friction: %f"), CurrentFriction);
+	// Boosting Debug
+	// Drift Timer
+	GEngine->AddOnScreenDebugMessage(0, 5.f, FColor::Red, FString::Printf(TEXT("DriftTimer: %f"), DriftTimer));
+    // Boost Force
+	GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Red, FString::Printf(TEXT("BoostForce: %f"), 500.0f * (DriftTimer - DisplaySpeed)));
+	// Current Friction
+	GEngine->AddOnScreenDebugMessage(2, 5.f, FColor::Red, FString::Printf(TEXT("CurrentFriction: %f"), CurrentFriction));
 
     APlayerController* PlayerController = Cast<APlayerController>(GetController());
     if (PlayerController)
