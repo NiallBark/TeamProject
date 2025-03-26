@@ -46,9 +46,25 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "Car")
 	float DriftTimer = 0.0f;
 
+	// Car Drift Bool
+	UPROPERTY(BlueprintReadOnly, Category = "Car")
+	bool bIsDrifting = false;
+
 	// Drift Max Time
 	UPROPERTY(BlueprintReadOnly, Category = "Car")
 	float DriftMaxTime = 1.5f;
+
+	// Car Drift Friction
+	UPROPERTY(VisibleAnywhere, Category = "Car")
+	float DriftFriction = 2.0f;
+
+	// Car Default Friction
+	UPROPERTY(VisibleAnywhere, Category = "Car")
+	float DefaultFriction = 4.0f;
+
+	// Car Current Friction
+	UPROPERTY(BlueprintReadOnly, Category = "Car")
+	float CurrentFriction = 4.0f;
 
 public:
 	ABaseChaosCar();

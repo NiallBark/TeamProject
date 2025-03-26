@@ -21,7 +21,7 @@ ABaseChaosCar::ABaseChaosCar()
     DefaultCameraRotation = FRotator(0.f, 0.f, 0.f);
     OriginalSpringArmRotation = CarSpringArm->GetRelativeRotation();
     DriftTimer = 0.f;
-    DriftMaxTime = 5.f; // Example value, adjust as needed
+    DriftMaxTime = 5.0f; // Example value, adjust as needed
 }
 
 void ABaseChaosCar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -31,8 +31,9 @@ void ABaseChaosCar::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
     PlayerInputComponent->BindAction("LookLeft", IE_Repeat, this, &ABaseChaosCar::LookLeft);
     PlayerInputComponent->BindAction("LookRight", IE_Repeat, this, &ABaseChaosCar::LookRight);
     PlayerInputComponent->BindAction("LookBack", IE_Repeat, this, &ABaseChaosCar::LookBack);
-    PlayerInputComponent->BindAction("Drift", IE_Pressed, this, &ABaseChaosCar::Drift);
-    PlayerInputComponent->BindAction("Drift", IE_Released, this, &ABaseChaosCar::StopDrift);
+    PlayerInputComponent->BindAction("Drift2", IE_Repeat, this, &ABaseChaosCar::Drift);
+	PlayerInputComponent->BindAction("Drift2", IE_Pressed, this, &ABaseChaosCar::Drift);
+    PlayerInputComponent->BindAction("Drift2", IE_Released, this, &ABaseChaosCar::StopDrift);
 }
 
 void ABaseChaosCar::LookLeft()
@@ -69,14 +70,21 @@ void ABaseChaosCar::ResetCameraRotation()
 
 void ABaseChaosCar::Drift()
 {
-    if (DriftTimer <= DriftMaxTime)
+	bIsDrifting = true;
+	CurrentFriction = DriftFriction;
+    if (DriftTimer < DriftMaxTime)
     {
-        DriftTimer += GetWorld()->GetDeltaSeconds();
+        DriftTimer += GetWorld()->GetDeltaSeconds() * (7.5 * (DefaultFriction - DriftFriction));
+    }
+    else
+    {
+		DriftTimer = DriftMaxTime;
     }
 }
 
 void ABaseChaosCar::StopDrift()
 {
+	bIsDrifting = false;
     // Apply forward force to the car
     FVector ForwardForce = GetActorForwardVector() * 1000000.f * DriftTimer;
     //GetVehicleMovement()->AddForce(ForwardForce);
@@ -90,6 +98,21 @@ void ABaseChaosCar::Tick(float DeltaTime)
     TrueSpeed = GetVehicleMovement()->GetForwardSpeed();
     DisplaySpeed = FMath::Abs(TrueSpeed) / 1280.0f;
     DisplaySpeed = FMath::RoundToFloat(DisplaySpeed * 10) / 10;
+
+    if (!bIsDrifting)
+    {
+		if (CurrentFriction < DefaultFriction)
+		{
+			CurrentFriction = FMath::FInterpTo(CurrentFriction, DefaultFriction, DeltaTime, 20.0f);
+		}
+		else
+		{
+            CurrentFriction = DefaultFriction;
+		}
+    }
+
+	// Debug Friction
+	UE_LOG(LogTemp, Warning, TEXT("Current Friction: %f"), CurrentFriction);
 
     APlayerController* PlayerController = Cast<APlayerController>(GetController());
     if (PlayerController)
