@@ -289,8 +289,8 @@
 /I "Runtime\Experimental\ChaosVehicles\ChaosVehiclesCore\Public"
 /I "..\Intermediate\Build\Win64\UnrealEditor\Inc\ChaosVehiclesEngine\UHT"
 /I "Runtime\Experimental\ChaosVehicles\ChaosVehiclesEngine\Public"
-/I "C:\Temp\Github\TeamProject\TeamProjectWheelz\Intermediate\Build\Win64\UnrealEditor\Inc\TeamProjectWheelz\UHT"
-/I "C:\Temp\Github\TeamProject\TeamProjectWheelz\Source"
+/I "C:\Users\100627439\Desktop\Github\TeamProjectWheelz\Intermediate\Build\Win64\UnrealEditor\Inc\TeamProjectWheelz\UHT"
+/I "C:\Users\100627439\Desktop\Github\TeamProjectWheelz\Source"
 /external:W0
 /external:I "ThirdParty\LibTiff\Source\Win64"
 /external:I "ThirdParty\LibTiff\Source"
