@@ -21,6 +21,9 @@ protected:
     // Called every frame
     virtual void Tick(float DeltaTime) override;
 
+    // Called when the game starts or when spawned
+    virtual void BeginPlay() override;
+
     // Car True Speed
     UPROPERTY(BlueprintReadOnly, Category = "Car")
     float TrueSpeed;
@@ -64,6 +67,8 @@ protected:
     // Car Current Friction
     UPROPERTY(BlueprintReadOnly, Category = "Car")
     float CurrentFriction = 4.0f;
+
+    UPrimitiveComponent* CarRoot;
 
 public:
     ABaseChaosCar();
@@ -127,12 +132,6 @@ private:
     void ResetCameraRotation();
     void Drift();
     void StopDrift();
-
-    UFUNCTION(BlueprintCallable, Category = "Car")
-    void MoveRightCPlus(float Val);
-
-    UFUNCTION(BlueprintCallable, Category = "Car")
-    void ThrottleCPlus(float Val);
 
     FRotator DefaultCameraRotation;
     FRotator OriginalSpringArmRotation;

@@ -22,101 +22,9 @@ TEAMPROJECTWHEELZ_API UClass* Z_Construct_UClass_ABaseChaosCar_NoRegister();
 UPackage* Z_Construct_UPackage__Script_TeamProjectWheelz();
 // End Cross Module References
 
-// Begin Class ABaseChaosCar Function MoveRightCPlus
-struct Z_Construct_UFunction_ABaseChaosCar_MoveRightCPlus_Statics
-{
-	struct BaseChaosCar_eventMoveRightCPlus_Parms
-	{
-		float Val;
-	};
-#if WITH_METADATA
-	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "Category", "Car" },
-		{ "ModuleRelativePath", "BaseChaosCar.h" },
-	};
-#endif // WITH_METADATA
-	static const UECodeGen_Private::FFloatPropertyParams NewProp_Val;
-	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
-	static const UECodeGen_Private::FFunctionParams FuncParams;
-};
-const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_ABaseChaosCar_MoveRightCPlus_Statics::NewProp_Val = { "Val", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(BaseChaosCar_eventMoveRightCPlus_Parms, Val), METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ABaseChaosCar_MoveRightCPlus_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ABaseChaosCar_MoveRightCPlus_Statics::NewProp_Val,
-};
-static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_ABaseChaosCar_MoveRightCPlus_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ABaseChaosCar_MoveRightCPlus_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ABaseChaosCar, nullptr, "MoveRightCPlus", nullptr, nullptr, Z_Construct_UFunction_ABaseChaosCar_MoveRightCPlus_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ABaseChaosCar_MoveRightCPlus_Statics::PropPointers), sizeof(Z_Construct_UFunction_ABaseChaosCar_MoveRightCPlus_Statics::BaseChaosCar_eventMoveRightCPlus_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04040401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ABaseChaosCar_MoveRightCPlus_Statics::Function_MetaDataParams), Z_Construct_UFunction_ABaseChaosCar_MoveRightCPlus_Statics::Function_MetaDataParams) };
-static_assert(sizeof(Z_Construct_UFunction_ABaseChaosCar_MoveRightCPlus_Statics::BaseChaosCar_eventMoveRightCPlus_Parms) < MAX_uint16);
-UFunction* Z_Construct_UFunction_ABaseChaosCar_MoveRightCPlus()
-{
-	static UFunction* ReturnFunction = nullptr;
-	if (!ReturnFunction)
-	{
-		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ABaseChaosCar_MoveRightCPlus_Statics::FuncParams);
-	}
-	return ReturnFunction;
-}
-DEFINE_FUNCTION(ABaseChaosCar::execMoveRightCPlus)
-{
-	P_GET_PROPERTY(FFloatProperty,Z_Param_Val);
-	P_FINISH;
-	P_NATIVE_BEGIN;
-	P_THIS->MoveRightCPlus(Z_Param_Val);
-	P_NATIVE_END;
-}
-// End Class ABaseChaosCar Function MoveRightCPlus
-
-// Begin Class ABaseChaosCar Function ThrottleCPlus
-struct Z_Construct_UFunction_ABaseChaosCar_ThrottleCPlus_Statics
-{
-	struct BaseChaosCar_eventThrottleCPlus_Parms
-	{
-		float Val;
-	};
-#if WITH_METADATA
-	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
-		{ "Category", "Car" },
-		{ "ModuleRelativePath", "BaseChaosCar.h" },
-	};
-#endif // WITH_METADATA
-	static const UECodeGen_Private::FFloatPropertyParams NewProp_Val;
-	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
-	static const UECodeGen_Private::FFunctionParams FuncParams;
-};
-const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_ABaseChaosCar_ThrottleCPlus_Statics::NewProp_Val = { "Val", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(BaseChaosCar_eventThrottleCPlus_Parms, Val), METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ABaseChaosCar_ThrottleCPlus_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ABaseChaosCar_ThrottleCPlus_Statics::NewProp_Val,
-};
-static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_ABaseChaosCar_ThrottleCPlus_Statics::PropPointers) < 2048);
-const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ABaseChaosCar_ThrottleCPlus_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ABaseChaosCar, nullptr, "ThrottleCPlus", nullptr, nullptr, Z_Construct_UFunction_ABaseChaosCar_ThrottleCPlus_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ABaseChaosCar_ThrottleCPlus_Statics::PropPointers), sizeof(Z_Construct_UFunction_ABaseChaosCar_ThrottleCPlus_Statics::BaseChaosCar_eventThrottleCPlus_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04040401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ABaseChaosCar_ThrottleCPlus_Statics::Function_MetaDataParams), Z_Construct_UFunction_ABaseChaosCar_ThrottleCPlus_Statics::Function_MetaDataParams) };
-static_assert(sizeof(Z_Construct_UFunction_ABaseChaosCar_ThrottleCPlus_Statics::BaseChaosCar_eventThrottleCPlus_Parms) < MAX_uint16);
-UFunction* Z_Construct_UFunction_ABaseChaosCar_ThrottleCPlus()
-{
-	static UFunction* ReturnFunction = nullptr;
-	if (!ReturnFunction)
-	{
-		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ABaseChaosCar_ThrottleCPlus_Statics::FuncParams);
-	}
-	return ReturnFunction;
-}
-DEFINE_FUNCTION(ABaseChaosCar::execThrottleCPlus)
-{
-	P_GET_PROPERTY(FFloatProperty,Z_Param_Val);
-	P_FINISH;
-	P_NATIVE_BEGIN;
-	P_THIS->ThrottleCPlus(Z_Param_Val);
-	P_NATIVE_END;
-}
-// End Class ABaseChaosCar Function ThrottleCPlus
-
 // Begin Class ABaseChaosCar
 void ABaseChaosCar::StaticRegisterNativesABaseChaosCar()
 {
-	UClass* Class = ABaseChaosCar::StaticClass();
-	static const FNameNativePtrPair Funcs[] = {
-		{ "MoveRightCPlus", &ABaseChaosCar::execMoveRightCPlus },
-		{ "ThrottleCPlus", &ABaseChaosCar::execThrottleCPlus },
-	};
-	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
 IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(ABaseChaosCar);
 UClass* Z_Construct_UClass_ABaseChaosCar_NoRegister()
@@ -393,11 +301,6 @@ struct Z_Construct_UClass_ABaseChaosCar_Statics
 	static const UECodeGen_Private::FStructPropertyParams NewProp_ParticleColor;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
-	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_ABaseChaosCar_MoveRightCPlus, "MoveRightCPlus" }, // 926985876
-		{ &Z_Construct_UFunction_ABaseChaosCar_ThrottleCPlus, "ThrottleCPlus" }, // 3643080086
-	};
-	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ABaseChaosCar>::IsAbstract,
 	};
@@ -472,11 +375,11 @@ const UECodeGen_Private::FClassParams Z_Construct_UClass_ABaseChaosCar_Statics::
 	"Game",
 	&StaticCppClassTypeInfo,
 	DependentSingletons,
-	FuncInfo,
+	nullptr,
 	Z_Construct_UClass_ABaseChaosCar_Statics::PropPointers,
 	nullptr,
 	UE_ARRAY_COUNT(DependentSingletons),
-	UE_ARRAY_COUNT(FuncInfo),
+	0,
 	UE_ARRAY_COUNT(Z_Construct_UClass_ABaseChaosCar_Statics::PropPointers),
 	0,
 	0x009000A4u,
@@ -499,14 +402,14 @@ ABaseChaosCar::~ABaseChaosCar() {}
 // End Class ABaseChaosCar
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_Users_100627439_Desktop_Github_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_Statics
+struct Z_CompiledInDeferFile_FID_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ABaseChaosCar, ABaseChaosCar::StaticClass, TEXT("ABaseChaosCar"), &Z_Registration_Info_UClass_ABaseChaosCar, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ABaseChaosCar), 3636255149U) },
+		{ Z_Construct_UClass_ABaseChaosCar, ABaseChaosCar::StaticClass, TEXT("ABaseChaosCar"), &Z_Registration_Info_UClass_ABaseChaosCar, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ABaseChaosCar), 2617537575U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_100627439_Desktop_Github_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_1199860628(TEXT("/Script/TeamProjectWheelz"),
-	Z_CompiledInDeferFile_FID_Users_100627439_Desktop_Github_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_100627439_Desktop_Github_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_3322262243(TEXT("/Script/TeamProjectWheelz"),
+	Z_CompiledInDeferFile_FID_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration

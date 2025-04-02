@@ -44,8 +44,6 @@ void ABaseChaosCar::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
     PlayerInputComponent->BindAction("Drift2", IE_Repeat, this, &ABaseChaosCar::Drift);
     PlayerInputComponent->BindAction("Drift2", IE_Pressed, this, &ABaseChaosCar::Drift);
     PlayerInputComponent->BindAction("Drift2", IE_Released, this, &ABaseChaosCar::StopDrift);
-    PlayerInputComponent->BindAxis("MoveRight", this, &ABaseChaosCar::MoveRightCPlus);
-    PlayerInputComponent->BindAxis("Throttle", this, &ABaseChaosCar::ThrottleCPlus);
 }
 
 void ABaseChaosCar::LookLeft()
@@ -92,47 +90,48 @@ void ABaseChaosCar::Drift()
         DriftTimer = DriftMaxTime;
     }
 
-    // Use ParticleColor as the static color
-    FLinearColor DesiredColor = ParticleColor;
+    FString ColorParameterName = "ColorMaximum";
 
     // Activate or reactivate the NiagaraFX Components for Back Left Tire
-    if (BackLeftTireFX && BackLeftTireFXPosition && !bIsDrifting)
+    if (BackLeftTireFX && BackLeftTireFXPosition)
     {
         if (!BackLeftTireFXComponent)
         {
-            // Spawn the Niagara system and set the color
-            BackLeftTireFXComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(BackLeftTireFX, BackLeftTireFXPosition, NAME_None, FVector::ZeroVector, FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset, true);
-            // Set the "Color Maximum" parameter instead of "Color"
-            UNiagaraComponent* NiagaraCompLeft = UNiagaraFunctionLibrary::SpawnSystemAttached(BackLeftTireFX, BackLeftTireFXPosition, NAME_None, FVector::ZeroVector, FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset, true);
-            NiagaraCompLeft->SetNiagaraVariableLinearColor(FString("Color Maximum"), DesiredColor);
+            BackLeftTireFXComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
+                BackLeftTireFX, BackLeftTireFXPosition, NAME_None, FVector::ZeroVector, 
+                FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset, true);
+
+            GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Spawning BackLeftTireFXComponent"));
         }
         else
         {
-            // Activate the system if it's already created and set the color
             BackLeftTireFXComponent->Activate(true);
-            UNiagaraComponent* NiagaraCompLeft = UNiagaraFunctionLibrary::SpawnSystemAttached(BackLeftTireFX, BackLeftTireFXPosition, NAME_None, FVector::ZeroVector, FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset, true);
-            NiagaraCompLeft->SetNiagaraVariableLinearColor(FString("Color Maximum"), DesiredColor);
+            GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Activating BackLeftTireFXComponent"));
         }
+
+        // Correct usage of FName
+        BackLeftTireFXComponent->SetNiagaraVariableLinearColor(ColorParameterName, ParticleColor);
     }
 
     // Activate or reactivate the NiagaraFX Components for Back Right Tire
-    if (BackRightTireFX && BackRightTireFXPosition && !bIsDrifting)
+    if (BackRightTireFX && BackRightTireFXPosition)
     {
         if (!BackRightTireFXComponent)
         {
-            // Spawn the Niagara system and set the color
-            BackRightTireFXComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(BackRightTireFX, BackRightTireFXPosition, NAME_None, FVector::ZeroVector, FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset, true);
-            // Set the "Color Maximum" parameter instead of "Color"
-            UNiagaraComponent* NiagaraCompRight = UNiagaraFunctionLibrary::SpawnSystemAttached(BackRightTireFX, BackRightTireFXPosition, NAME_None, FVector::ZeroVector, FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset, true);
-            NiagaraCompRight->SetNiagaraVariableLinearColor(FString("Color Maximum"), DesiredColor);
+            BackRightTireFXComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
+                BackRightTireFX, BackRightTireFXPosition, NAME_None, FVector::ZeroVector, 
+                FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset, true);
+
+            GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Spawning BackRightTireFXComponent"));
         }
         else
         {
-            // Activate the system if it's already created and set the color
             BackRightTireFXComponent->Activate(true);
-            UNiagaraComponent* NiagaraCompRight = UNiagaraFunctionLibrary::SpawnSystemAttached(BackRightTireFX, BackRightTireFXPosition, NAME_None, FVector::ZeroVector, FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset, true);
-            NiagaraCompRight->SetNiagaraVariableLinearColor(FString("Color Maximum"), DesiredColor);
+            GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Activating BackRightTireFXComponent"));
         }
+
+        // Correct usage of FName
+        BackRightTireFXComponent->SetNiagaraVariableLinearColor(ColorParameterName, ParticleColor);
     }
 
     bIsDrifting = true;
@@ -145,7 +144,6 @@ void ABaseChaosCar::StopDrift()
     bIsDrifting = false;
     DriftCooldown = 0.0f;
     bCanDrift = false;
-    UPrimitiveComponent* CarRoot = Cast<UPrimitiveComponent>(GetRootComponent());
 
     if (CarRoot)
     {
@@ -168,26 +166,29 @@ void ABaseChaosCar::StopDrift()
     // Deactivate the NiagaraFX Components
     if (BackLeftTireFXComponent)
     {
-        GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("BackLeftTireFXComponent is not null"));
         BackLeftTireFXComponent->Deactivate();
-    }
-    if (BackRightTireFXComponent)
-    {
-        GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, TEXT("BackRightTireFXComponent is not null"));
-        BackRightTireFXComponent->Deactivate();
+        BackLeftTireFXComponent = nullptr;
+        GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Deactivating BackLeftTireFXComponent"));
     }
 
-    // Activate the BoostFX Component
+    if (BackRightTireFXComponent)
+    {
+        BackRightTireFXComponent->Deactivate();
+        BackRightTireFXComponent = nullptr;
+        GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Deactivating BackRightTireFXComponent"));
+    }
+
+    // Activate the BoostFX Component if applicable
     if (BoostFX && BoostFXPosition)
     {
         if (!BoostFXComponent)
         {
-            GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow, TEXT("BoostFXComponent is null"));
-            BoostFXComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(BoostFX, BoostFXPosition, NAME_None, FVector::ZeroVector, FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset, true);
+            BoostFXComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
+                BoostFX, BoostFXPosition, NAME_None, FVector::ZeroVector, 
+                FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset, true);
         }
         else
         {
-            GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, TEXT("BoostFXComponent is not null"));
             BoostFXComponent->Activate(true);
         }
     }
@@ -195,11 +196,22 @@ void ABaseChaosCar::StopDrift()
     DriftTimer = 0.f;
 }
 
+
 void ABaseChaosCar::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
     TeleportCooldownTimer -= DeltaTime;
+    if (TeleportCooldownTimer > 0)
+    {
+        CarSpringArm->bEnableCameraLag = false;
+        CarSpringArm->bEnableCameraRotationLag = false;
+    }
+    else
+    {
+        CarSpringArm->bEnableCameraLag = true;
+        CarSpringArm->bEnableCameraRotationLag = true;
+    }
     DriftCooldown += DeltaTime;
     TrueSpeed = GetVehicleMovement()->GetForwardSpeed();
     DisplaySpeed = FMath::Abs(TrueSpeed) / 1280.0f;
@@ -213,11 +225,24 @@ void ABaseChaosCar::Tick(float DeltaTime)
         }
         else
         {
+            if (BoostFXComponent && BoostFXComponent->IsActive() && CurrentFriction)
+            {
+                BoostFXComponent->Deactivate();
+                BoostFXComponent = nullptr;
+            }
             CurrentFriction = DefaultFriction;
         }
     }
     else
     {
+        FVector Velocity = GetVelocity();
+        float ForwardSpeed = FVector::DotProduct(Velocity, GetActorForwardVector()); // Speed along forward direction
+        float SidewaysSpeed = FVector::DotProduct(Velocity, GetActorRightVector());  // Speed along right direction (sideways drift)
+
+        // Debugging - Display speeds
+        GEngine->AddOnScreenDebugMessage(4, 5.f, FColor::Red, FString::Printf(TEXT("ForwardSpeed: %f"), ForwardSpeed));
+        GEngine->AddOnScreenDebugMessage(5, 5.f, FColor::Red, FString::Printf(TEXT("SidewaysSpeed: %f"), SidewaysSpeed));
+
         if (DriftTimer < DriftMaxTime)
         {
             DriftTimer += DeltaTime * (5 * (DefaultFriction - DriftFriction));
@@ -231,17 +256,30 @@ void ABaseChaosCar::Tick(float DeltaTime)
         {
             CurrentFriction = FMath::FInterpTo(CurrentFriction, DriftingFriction, DeltaTime, 3.0f);
         }
+        else
+        {
+            CurrentFriction = DriftingFriction;
+        }
+
+        // Apply corrective force if going too slow or drifting sideways too much
+        float MinimumForwardSpeed = 300.f; // Set this value to your desired "slow" speed threshold
+        float SidewaysThreshold = 100.f;   // Set this value to how much sideways drifting is acceptable
+
+        // Check if the car's forward speed is too slow or if it is drifting sideways
+        if (ForwardSpeed < MinimumForwardSpeed || FMath::Abs(SidewaysSpeed) > FMath::Abs(ForwardSpeed) + SidewaysThreshold)
+        {
+            // Apply forward force to speed up the car
+            FVector ForwardForce = GetActorForwardVector() * (MinimumForwardSpeed - ForwardSpeed) * 100.0f;  // Apply force in the forward direction
+            CarRoot->AddImpulse(ForwardForce);
+            GEngine->AddOnScreenDebugMessage(6, 5.f, FColor::Red, TEXT("Applying forward force"));
+        }
     }
 
     // Boosting Debug
-    // Drift Timer
     GEngine->AddOnScreenDebugMessage(0, 5.f, FColor::Red, FString::Printf(TEXT("DriftTimer: %f"), DriftTimer));
-    // Boost Force
     GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Red, FString::Printf(TEXT("BoostForce: %f"), 350.0f * (DriftTimer - (DisplaySpeed * 2))));
-    // Current Friction
     GEngine->AddOnScreenDebugMessage(2, 5.f, FColor::Red, FString::Printf(TEXT("CurrentFriction: %f"), CurrentFriction));
-    // Particle Color
-    GEngine->AddOnScreenDebugMessage(3, 5.f, FColor::Red, FString::Printf(TEXT("ParticleColor: %s"), *ParticleColor.ToString()));
+    GEngine->AddOnScreenDebugMessage(3, 5.f, ParticleColor.ToFColor(true), FString::Printf(TEXT("ParticleColor: %s"), *ParticleColor.ToString()));
 
     APlayerController* PlayerController = Cast<APlayerController>(GetController());
     if (PlayerController)
@@ -249,8 +287,6 @@ void ABaseChaosCar::Tick(float DeltaTime)
         bool bIsLookingLeft = PlayerController->IsInputKeyDown(EKeys::Left);
         bool bIsLookingRight = PlayerController->IsInputKeyDown(EKeys::Right);
         bool bIsLookingBack = PlayerController->IsInputKeyDown(EKeys::Down);
-
-        //UE_LOG(LogTemp, Warning, TEXT("bIsLookingLeft: %d, bIsLookingRight: %d, bIsLookingBack: %d"), bIsLookingLeft, bIsLookingRight, bIsLookingBack);
 
         if (!bIsLookingLeft && !bIsLookingRight && !bIsLookingBack)
         {
@@ -271,6 +307,13 @@ void ABaseChaosCar::Tick(float DeltaTime)
     }
 }
 
+
+void ABaseChaosCar::BeginPlay()
+{
+    Super::BeginPlay();
+    CarRoot = Cast<UPrimitiveComponent>(GetRootComponent());
+}
+
 bool ABaseChaosCar::CheckTeleportCooldown()
 {
     if (TeleportCooldownTimer <= 0)
@@ -282,14 +325,4 @@ bool ABaseChaosCar::CheckTeleportCooldown()
     {
         return false;
     }
-}
-
-void ABaseChaosCar::MoveRightCPlus(float Val)
-{
-    GEngine->AddOnScreenDebugMessage(3, 5.f, FColor::Red, FString::Printf(TEXT("MoveRight: %f"), Val));
-}
-
-void ABaseChaosCar::ThrottleCPlus(float Val)
-{
-    GEngine->AddOnScreenDebugMessage(4, 5.f, FColor::Red, FString::Printf(TEXT("Throttle: %f"), Val));
 }

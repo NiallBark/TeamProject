@@ -35,6 +35,7 @@
 /NODEFAULTLIB:"LIBCD"
 /NODEFAULTLIB:"LIBCPD"
 /FUNCTIONPADMIN:6
+/NATVIS:"..\Plugins\FX\Niagara\Intermediate\Build\Win64\x64\UnrealEditor\Development\Niagara\Niagara.natvis"
 "C:\Users\100627439\Desktop\Github\TeamProjectWheelz\Intermediate\Build\Win64\x64\TeamProjectWheelzEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.InclOrderOldest.h.obj"
 "C:\Users\100627439\Desktop\Github\TeamProjectWheelz\Intermediate\Build\Win64\x64\UnrealEditor\Development\TeamProjectWheelz\BaseChaosCar.gen.cpp.obj"
 "C:\Users\100627439\Desktop\Github\TeamProjectWheelz\Intermediate\Build\Win64\x64\UnrealEditor\Development\TeamProjectWheelz\BoostPad.gen.cpp.obj"
@@ -50,6 +51,7 @@
 "..\Intermediate\Build\Win64\x64\UnrealEditor\Development\Core\UnrealEditor-Core.lib"
 "..\Intermediate\Build\Win64\x64\UnrealEditor\Development\CoreUObject\UnrealEditor-CoreUObject.lib"
 "..\Intermediate\Build\Win64\x64\UnrealEditor\Development\InputCore\UnrealEditor-InputCore.lib"
+"..\Plugins\FX\Niagara\Intermediate\Build\Win64\x64\UnrealEditor\Development\Niagara\UnrealEditor-Niagara.lib"
 "delayimp.lib"
 "wininet.lib"
 "rpcrt4.lib"
