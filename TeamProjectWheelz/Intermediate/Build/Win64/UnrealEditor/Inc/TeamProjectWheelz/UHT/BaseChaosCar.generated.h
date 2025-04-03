@@ -14,7 +14,12 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define TEAMPROJECTWHEELZ_BaseChaosCar_generated_h
 
-#define FID_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_17_INCLASS_NO_PURE_DECLS \
+#define FID_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execDriveForward); \
+	DECLARE_FUNCTION(execTurning);
+
+
+#define FID_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_19_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesABaseChaosCar(); \
 	friend struct Z_Construct_UClass_ABaseChaosCar_Statics; \
@@ -23,7 +28,7 @@ public: \
 	DECLARE_SERIALIZER(ABaseChaosCar)
 
 
-#define FID_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_17_ENHANCED_CONSTRUCTORS \
+#define FID_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_19_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	ABaseChaosCar(ABaseChaosCar&&); \
@@ -35,12 +40,13 @@ public: \
 	NO_API virtual ~ABaseChaosCar();
 
 
-#define FID_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_14_PROLOG
-#define FID_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_17_GENERATED_BODY \
+#define FID_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_16_PROLOG
+#define FID_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_19_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_17_INCLASS_NO_PURE_DECLS \
-	FID_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_17_ENHANCED_CONSTRUCTORS \
+	FID_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_19_INCLASS_NO_PURE_DECLS \
+	FID_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_19_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

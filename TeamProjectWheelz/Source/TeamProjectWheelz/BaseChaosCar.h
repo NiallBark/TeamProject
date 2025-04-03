@@ -7,6 +7,8 @@
 #include "ChaosWheeledVehicleMovementComponent.h"
 #include "NiagaraFunctionLibrary.h"
 #include "NiagaraComponent.h"
+#include "CheckpointManager.h"
+#include "Checkpoint.h"
 #include "BaseChaosCar.generated.h"
 
 class UNiagaraSystem;
@@ -23,6 +25,33 @@ protected:
 
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
+
+    // AI Check
+    UPROPERTY(EditAnywhere, Category = "AI")
+    bool IsAI = false;
+
+    UPROPERTY(EditAnywhere, Category = "AI");
+    bool IsAISmart = false;
+
+    // Chance for the AI to take a shortcut from 0 to 10
+    UPROPERTY(EditAnywhere, Category = "AI");
+    int AIShortcutChance = 0;
+
+    // Chance roll for the AI to take a shortcut from 0 to 10
+    UPROPERTY(EditAnywhere, Category = "AI");
+    int AIShortcutRoll = 0;
+
+    // Ai's Target Point Deviation value
+    UPROPERTY(EditAnywhere, Category = "AI");
+    int LocationDeviation = 0;
+
+    // Target Speed
+    UPROPERTY(EditAnywhere, Category = "AI");
+    float TargetSpeed = 2.0f;
+
+    // Target point for the AI to move towards
+    UPROPERTY(EditAnywhere, Category = "AI");
+    FVector TargetPoint;
 
     // Car True Speed
     UPROPERTY(BlueprintReadOnly, Category = "Car")
@@ -68,7 +97,36 @@ protected:
     UPROPERTY(BlueprintReadOnly, Category = "Car")
     float CurrentFriction = 4.0f;
 
+    // Internal Timer
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Others")
+    float InternalTimer = 0;
+
+    // Display Timer
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Others")
+    int DisplayTimer = 0;
+
+    // Best Lap Time
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Others")
+    int BestLapTime = 0;
+
+    // Checkpoint Counter
+    UPROPERTY(EditAnywhere, Category = "Others")
+    int CheckpointCounter = 0;
+
+    // Checkpoint Limit
+    UPROPERTY(EditAnywhere, Category = "Others")
+    int CheckpointLimit = 33;
+
     UPrimitiveComponent* CarRoot;
+
+private:
+    UPROPERTY(EditAnywhere, Category = "AI");
+    class ACheckpointManager* CheckpointManager;
+    UPROPERTY(EditAnywhere, Category = "AI");
+    class ACheckpoint* CurrentCheckpoint;
+    UPROPERTY(EditAnywhere, Category = "AI");
+    class ACheckpoint* NextCheckpoint;
+    
 
 public:
     ABaseChaosCar();
@@ -111,6 +169,10 @@ public:
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Car")
     USceneComponent* BoostFXPosition;
 
+    // Lap Counter
+    UPROPERTY(BlueprintReadWrite, Category = "Others")
+    int LapCounter = 1;
+
     // References to the spawned Niagara components
     UPROPERTY()
     UNiagaraComponent* BackLeftTireFXComponent;
@@ -121,9 +183,29 @@ public:
     UPROPERTY()
     UNiagaraComponent* BoostFXComponent;
 
+    // Stored Position
+    FVector StoredPosition;
+
+    // Stored Rotation
+    FRotator StoredRotation;
+
     // Main Particle Color
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
     FLinearColor ParticleColor = FLinearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+    // Checkpoint Number / Position /
+    virtual void UpdateCheckpointCounter(int Checkpoint, FVector RespawnPoint, FRotator RespawnRotation);
+
+    // Reset Car with both position and rotation
+    virtual void ResetCar(FVector RespawnPoint, FRotator RespawnRotation);
+    
+    // Expose Turning function to Blueprints
+    UFUNCTION(BlueprintCallable, Category = "Car")
+    void Turning(float Value);
+
+    // Expose DriveForward function to Blueprints
+    UFUNCTION(BlueprintCallable, Category = "Car")
+    void DriveForward(float Value);
 
 private:
     void LookLeft();
@@ -132,6 +214,9 @@ private:
     void ResetCameraRotation();
     void Drift();
     void StopDrift();
+    void UpdateCheckpoint(bool IsSmart);
+    void CompleteLap(float);
+   
 
     FRotator DefaultCameraRotation;
     FRotator OriginalSpringArmRotation;

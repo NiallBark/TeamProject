@@ -1,5 +1,9 @@
 #include "BaseChaosCar.h"
 #include "ChaosWheeledVehicleMovementComponent.h"
+#include "EngineUtils.h"
+#include "Engine/World.h"
+#include "DrawDebugHelpers.h"
+#include "IContentBrowserSingleton.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/PlayerController.h"
@@ -38,9 +42,14 @@ void ABaseChaosCar::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 
     UE_LOG(LogTemp, Warning, TEXT("SetupPlayerInputComponent called"));
 
-    PlayerInputComponent->BindAction("LookLeft", IE_Repeat, this, &ABaseChaosCar::LookLeft);
-    PlayerInputComponent->BindAction("LookRight", IE_Repeat, this, &ABaseChaosCar::LookRight);
-    PlayerInputComponent->BindAction("LookBack", IE_Repeat, this, &ABaseChaosCar::LookBack);
+    //Bind Input Actions if not AI
+    if (!IsAI)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("Player Input Component is not AI"));
+        PlayerInputComponent->BindAction("LookLeft", IE_Repeat, this, &ABaseChaosCar::LookLeft);
+        PlayerInputComponent->BindAction("LookRight", IE_Repeat, this, &ABaseChaosCar::LookRight);
+        PlayerInputComponent->BindAction("LookBack", IE_Repeat, this, &ABaseChaosCar::LookBack);
+    }
     PlayerInputComponent->BindAction("Drift2", IE_Repeat, this, &ABaseChaosCar::Drift);
     PlayerInputComponent->BindAction("Drift2", IE_Pressed, this, &ABaseChaosCar::Drift);
     PlayerInputComponent->BindAction("Drift2", IE_Released, this, &ABaseChaosCar::StopDrift);
@@ -101,12 +110,12 @@ void ABaseChaosCar::Drift()
                 BackLeftTireFX, BackLeftTireFXPosition, NAME_None, FVector::ZeroVector, 
                 FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset, true);
 
-            GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Spawning BackLeftTireFXComponent"));
+            //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Spawning BackLeftTireFXComponent"));
         }
         else
         {
             BackLeftTireFXComponent->Activate(true);
-            GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Activating BackLeftTireFXComponent"));
+            //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Activating BackLeftTireFXComponent"));
         }
 
         // Correct usage of FName
@@ -122,12 +131,12 @@ void ABaseChaosCar::Drift()
                 BackRightTireFX, BackRightTireFXPosition, NAME_None, FVector::ZeroVector, 
                 FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset, true);
 
-            GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Spawning BackRightTireFXComponent"));
+            //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Spawning BackRightTireFXComponent"));
         }
         else
         {
             BackRightTireFXComponent->Activate(true);
-            GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Activating BackRightTireFXComponent"));
+            //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Activating BackRightTireFXComponent"));
         }
 
         // Correct usage of FName
@@ -168,14 +177,14 @@ void ABaseChaosCar::StopDrift()
     {
         BackLeftTireFXComponent->Deactivate();
         BackLeftTireFXComponent = nullptr;
-        GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Deactivating BackLeftTireFXComponent"));
+        //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Deactivating BackLeftTireFXComponent"));
     }
 
     if (BackRightTireFXComponent)
     {
         BackRightTireFXComponent->Deactivate();
         BackRightTireFXComponent = nullptr;
-        GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Deactivating BackRightTireFXComponent"));
+        //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Deactivating BackRightTireFXComponent"));
     }
 
     // Activate the BoostFX Component if applicable
@@ -194,6 +203,50 @@ void ABaseChaosCar::StopDrift()
     }
 
     DriftTimer = 0.f;
+}
+
+void ABaseChaosCar::UpdateCheckpoint(bool IsSmart)
+{
+    // Roll for a chance to take a shortcut
+    AIShortcutRoll = FMath::RandRange(0, 10);
+    if (AIShortcutRoll > AIShortcutChance && CurrentCheckpoint->IsShortCut == true)
+    {
+        // Take a shortcut
+        CheckpointCounter ++;
+    }
+    
+    if (CheckpointManager && CheckpointManager->Checkpoints.Num() > 0)
+    {
+        // check if the current checkpoint is the last checkpoint
+        if (CheckpointCounter == CheckpointManager->Checkpoints.Num() - 1)
+        {
+            CheckpointCounter = 0;
+        }
+        CurrentCheckpoint = CheckpointManager->Checkpoints[CheckpointCounter];
+        // Use modulo to wrap around the index
+        NextCheckpoint = CheckpointManager->Checkpoints[(CheckpointCounter + 1) % CheckpointManager->Checkpoints.Num()];
+
+        TargetPoint = NextCheckpoint->GetAiTargetPoint(IsSmart, LocationDeviation);
+    }
+    else
+    {
+        UE_LOG(LogTemp, Error, TEXT("CheckpointManager is null or has no checkpoints"));
+    }
+}
+
+void ABaseChaosCar::CompleteLap(float LapTime)
+{
+    if (LapCounter == 3)
+    {
+        // Level Load
+    }
+    if (LapTime < BestLapTime || BestLapTime == 0)
+    {
+        BestLapTime = LapTime;
+    }
+    LapCounter++;
+    CheckpointCounter = 0;
+    InternalTimer = 0;
 }
 
 
@@ -240,8 +293,8 @@ void ABaseChaosCar::Tick(float DeltaTime)
         float SidewaysSpeed = FVector::DotProduct(Velocity, GetActorRightVector());  // Speed along right direction (sideways drift)
 
         // Debugging - Display speeds
-        GEngine->AddOnScreenDebugMessage(4, 5.f, FColor::Red, FString::Printf(TEXT("ForwardSpeed: %f"), ForwardSpeed));
-        GEngine->AddOnScreenDebugMessage(5, 5.f, FColor::Red, FString::Printf(TEXT("SidewaysSpeed: %f"), SidewaysSpeed));
+        //GEngine->AddOnScreenDebugMessage(4, 5.f, FColor::Red, FString::Printf(TEXT("ForwardSpeed: %f"), ForwardSpeed));
+        //GEngine->AddOnScreenDebugMessage(5, 5.f, FColor::Red, FString::Printf(TEXT("SidewaysSpeed: %f"), SidewaysSpeed));
 
         if (DriftTimer < DriftMaxTime)
         {
@@ -271,15 +324,18 @@ void ABaseChaosCar::Tick(float DeltaTime)
             // Apply forward force to speed up the car
             FVector ForwardForce = GetActorForwardVector() * (MinimumForwardSpeed - ForwardSpeed) * 100.0f;  // Apply force in the forward direction
             CarRoot->AddImpulse(ForwardForce);
-            GEngine->AddOnScreenDebugMessage(6, 5.f, FColor::Red, TEXT("Applying forward force"));
+            //GEngine->AddOnScreenDebugMessage(6, 5.f, FColor::Red, TEXT("Applying forward force"));
         }
     }
 
-    // Boosting Debug
-    GEngine->AddOnScreenDebugMessage(0, 5.f, FColor::Red, FString::Printf(TEXT("DriftTimer: %f"), DriftTimer));
-    GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Red, FString::Printf(TEXT("BoostForce: %f"), 350.0f * (DriftTimer - (DisplaySpeed * 2))));
-    GEngine->AddOnScreenDebugMessage(2, 5.f, FColor::Red, FString::Printf(TEXT("CurrentFriction: %f"), CurrentFriction));
-    GEngine->AddOnScreenDebugMessage(3, 5.f, ParticleColor.ToFColor(true), FString::Printf(TEXT("ParticleColor: %s"), *ParticleColor.ToString()));
+    //Debug
+    //GEngine->AddOnScreenDebugMessage(0, 5.f, FColor::Red, FString::Printf(TEXT("DriftTimer: %f"), DriftTimer));
+    //GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Red, FString::Printf(TEXT("BoostForce: %f"), 350.0f * (DriftTimer - (DisplaySpeed * 2))));
+    //GEngine->AddOnScreenDebugMessage(2, 5.f, FColor::Red, FString::Printf(TEXT("CurrentFriction: %f"), CurrentFriction));
+    //GEngine->AddOnScreenDebugMessage(3, 5.f, ParticleColor.ToFColor(true), FString::Printf(TEXT("ParticleColor: %s"), *ParticleColor.ToString()));
+
+    //Print VehicleMovementComponent
+    GEngine->AddOnScreenDebugMessage(7, 5.f, FColor::Red, FString::Printf(TEXT("VehicleMovementComponent: %s"), *GetVehicleMovement()->GetName()));
 
     APlayerController* PlayerController = Cast<APlayerController>(GetController());
     if (PlayerController)
@@ -305,6 +361,56 @@ void ABaseChaosCar::Tick(float DeltaTime)
             LookBack();
         }
     }
+
+    // AI Logic
+    if (IsAI)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("AI Logic is active"));
+        // Print Current Checkpoint and Next Checkpoint
+        if (CurrentCheckpoint)
+        {
+            GEngine->AddOnScreenDebugMessage(8, 5.f, FColor::Red, FString::Printf(TEXT("Current Checkpoint: %s"), *CurrentCheckpoint->GetName()));
+            GEngine->AddOnScreenDebugMessage(9, 5.f, FColor::Red, FString::Printf(TEXT("Next Checkpoint: %s"), *NextCheckpoint->GetName()));
+        }
+        
+        // Rotate the car towards the target point
+        FVector TargetLocation = TargetPoint;
+        TargetLocation.Z = GetActorLocation().Z;
+        FVector TargetDirection = TargetLocation - GetActorLocation();
+        TargetDirection.Normalize();
+        FRotator TargetRotation = TargetDirection.Rotation();
+        TargetRotation.Yaw -= 90.0f;
+        FRotator CurrentRotation = GetActorRotation();
+
+        // Get distance from the current location to the target location
+        float Distance = FVector::Dist(GetActorLocation(), TargetLocation);
+
+        // Find the shortest angle difference between the current and target yaw
+        float DeltaYaw = FMath::FindDeltaAngleDegrees(CurrentRotation.Yaw, TargetRotation.Yaw);
+        float AbsoluteDeltaYaw = FMath::Abs(DeltaYaw);
+        float TurnValue = FMath::Min(AbsoluteDeltaYaw / 10, 1.0f);
+        // Check if the absolute value of the yaw is greater than a value
+        if (AbsoluteDeltaYaw <= 10)
+        {
+            DriveForward(1.0f);
+            UE_LOG(LogTemp, Warning, TEXT("Driving forward"));
+        }
+        else
+        {
+            DriveForward(0.1f);
+            UE_LOG(LogTemp, Warning, TEXT("Driving slow"));
+        }
+        if (DeltaYaw > 3)
+        {
+            Turning(TurnValue);
+            UE_LOG(LogTemp, Warning, TEXT("Turning right"));
+        }
+        else if (DeltaYaw < -3)
+        {
+            Turning(-TurnValue);
+            UE_LOG(LogTemp, Warning, TEXT("Turning left"));
+        }
+    }
 }
 
 
@@ -312,6 +418,46 @@ void ABaseChaosCar::BeginPlay()
 {
     Super::BeginPlay();
     CarRoot = Cast<UPrimitiveComponent>(GetRootComponent());
+
+    // Find the CheckpointManager
+    for (TActorIterator<ACheckpointManager> It(GetWorld()); It; ++It)
+    {
+        CheckpointManager = *It;
+        break;
+    }
+    if (CheckpointManager && CheckpointManager->Checkpoints.Num() > 0)
+    {
+        CurrentCheckpoint = CheckpointManager->Checkpoints[0];
+        NextCheckpoint = CheckpointManager->Checkpoints.Num() > 1 ? CheckpointManager->Checkpoints[1] : nullptr;
+        if (IsAI && NextCheckpoint)
+        {
+            TargetPoint = NextCheckpoint->GetAiTargetPoint(IsAISmart, LocationDeviation);
+        }
+    }
+    else
+    {
+        UE_LOG(LogTemp, Error, TEXT("No CheckpointManager found or no checkpoints available"));
+    }
+
+    // AI Disabling
+    if (CarCamera && CarSpringArm)
+    {
+        if (IsAI)
+        {
+            CarCamera->SetActive(false);
+            CarSpringArm->SetActive(false);
+            DisableInput(nullptr);
+        }
+        else
+        {
+            CarCamera->SetActive(true);
+            CarSpringArm->SetActive(true);
+        }
+    }
+    else
+    {
+        UE_LOG(LogTemp, Error, TEXT("CarCamera or CarSpringArm is not initialized"));
+    }
 }
 
 bool ABaseChaosCar::CheckTeleportCooldown()
@@ -324,5 +470,72 @@ bool ABaseChaosCar::CheckTeleportCooldown()
     else
     {
         return false;
+    }
+}
+
+void ABaseChaosCar::UpdateCheckpointCounter(int Checkpoint, FVector RespawnPoint, FRotator RespawnRotation)
+{
+    if (LapCounter == 3 && Checkpoint == 0)
+    {
+        //load main menu level
+    }
+    if (Checkpoint == CheckpointCounter + 1 || Checkpoint == CheckpointCounter + 2)
+    {
+        if (CheckpointCounter >= CheckpointLimit)
+        {
+            CompleteLap(InternalTimer);
+        }
+        else
+        {
+            CheckpointCounter++;
+        }
+        StoredPosition = RespawnPoint;
+        StoredRotation = RespawnRotation;
+    }
+    else if (Checkpoint != CheckpointCounter && CheckpointCounter != 0 && Checkpoint < CheckpointLimit)
+    {
+        ResetCar(StoredPosition, StoredRotation);
+    }
+}
+
+void ABaseChaosCar::ResetCar(FVector RespawnPoint, FRotator RespawnRotation)
+{
+    SetActorRotation(RespawnRotation);
+    SetActorLocation(RespawnPoint);
+}
+
+void ABaseChaosCar::Turning(float Value)
+{
+    if (IsAI)
+    {
+        if (GetVehicleMovementComponent())
+        {
+            GetVehicleMovementComponent()->SetSteeringInput(Value);
+            GEngine->AddOnScreenDebugMessage(9, 5.f, FColor::Red, TEXT("Turning AI"));
+        }
+        else
+        {
+            GEngine->AddOnScreenDebugMessage(9, 5.f, FColor::Red, TEXT("VehicleMovementComponent is NULL!"));
+        }
+    }
+}
+
+void ABaseChaosCar::DriveForward(float Value)
+{
+    if (IsAI)
+    {
+        // AI logic for driving forward
+        if (Value > 0)
+        {
+            if (GetVehicleMovementComponent())
+            {
+                GetVehicleMovementComponent()->SetThrottleInput(Value);
+                GEngine->AddOnScreenDebugMessage(10, 5.f, FColor::Red, TEXT("Driving forward AI"));
+            }
+            else
+            {
+                GEngine->AddOnScreenDebugMessage(10, 5.f, FColor::Red, TEXT("VehicleMovementComponent is NULL!"));
+            }
+        }
     }
 }
