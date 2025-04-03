@@ -1,8 +1,8 @@
 {
 	"SourceFiles": [
-		"D:\\Git\\TeamProject\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\TeamProjectWheelz.Build.cs",
-		"D:\\Git\\TeamProject\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz.Target.cs",
-		"D:\\Git\\TeamProject\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelzEditor.Target.cs"
+		"A:\\This PC\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\TeamProjectWheelz.Build.cs",
+		"A:\\This PC\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz.Target.cs",
+		"A:\\This PC\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelzEditor.Target.cs"
 	],
 	"EngineVersion": "5.4.4"
 }
