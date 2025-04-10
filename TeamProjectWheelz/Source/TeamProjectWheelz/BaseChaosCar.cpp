@@ -8,6 +8,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/PlayerController.h"
 #include "Components/InputComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 ABaseChaosCar::ABaseChaosCar()
 {
@@ -207,30 +208,41 @@ void ABaseChaosCar::StopDrift()
 
 void ABaseChaosCar::UpdateCheckpoint(bool IsSmart)
 {
-    // Roll for a chance to take a shortcut
-    AIShortcutRoll = FMath::RandRange(0, 10);
-    if (AIShortcutRoll > AIShortcutChance && CurrentCheckpoint->IsShortCut == true)
+    if (IsAI)
     {
-        // Take a shortcut
-        CheckpointCounter ++;
-    }
-    
-    if (CheckpointManager && CheckpointManager->Checkpoints.Num() > 0)
-    {
-        // check if the current checkpoint is the last checkpoint
-        if (CheckpointCounter == CheckpointManager->Checkpoints.Num() - 1)
+        AIShortcutRoll = FMath::RandRange(0, 10);
+        if (AIShortcutRoll > AIShortcutChance && CurrentCheckpoint && CurrentCheckpoint->IsShortCut)
         {
-            CheckpointCounter = 0;
+            // check if the shortcut is within the array
+            if (CheckpointCounter < CheckpointManager->SpawnedCheckpoints.Num() - 1)
+            {
+                CheckpointCounter++;
+            }
+            else
+            {
+                CheckpointCounter = 0;
+            }
         }
-        CurrentCheckpoint = CheckpointManager->Checkpoints[CheckpointCounter];
-        // Use modulo to wrap around the index
-        NextCheckpoint = CheckpointManager->Checkpoints[(CheckpointCounter + 1) % CheckpointManager->Checkpoints.Num()];
+    }
 
-        TargetPoint = NextCheckpoint->GetAiTargetPoint(IsSmart, LocationDeviation);
+    if (CheckpointManager && CheckpointManager->SpawnedCheckpoints.Num() > 0)
+    {
+        // Set CheckpointRespawnPoint and CheckpointRespawnRotation
+        StoredPosition = CurrentCheckpoint->GetActorLocation();
+        StoredRotation = CurrentCheckpoint->GetActorRotation();
+        
+        CurrentCheckpoint = NextCheckpoint;
+        TargetSpeed = CurrentCheckpoint->TargetSpeed;
+
+        // Wrap around to the beginning of the array
+        NextCheckpoint = CheckpointManager->SpawnedCheckpoints[(CheckpointCounter + 1) % CheckpointManager->SpawnedCheckpoints.Num()];
+
+        // Update the target point for AI
+        TargetPoint = CurrentCheckpoint->GetAiTargetPoint(IsSmart, LocationDeviation);
     }
     else
     {
-        UE_LOG(LogTemp, Error, TEXT("CheckpointManager is null or has no checkpoints"));
+        UE_LOG(LogTemp, Error, TEXT("CheckpointManager is null or has no checkpoint"));
     }
 }
 
@@ -362,15 +374,33 @@ void ABaseChaosCar::Tick(float DeltaTime)
         }
     }
 
+    if (CurrentCheckpoint)
+    {
+        FVector Start = GetActorLocation();
+        FVector End = CurrentCheckpoint->GetActorLocation();
+        FColor LineColor = FColor::Green;
+
+        DrawDebugLine(GetWorld(), Start, End, LineColor, false, -1.0f, 0, 5.0f);
+    }
+
     // AI Logic
     if (IsAI)
     {
-        UE_LOG(LogTemp, Warning, TEXT("AI Logic is active"));
-        // Print Current Checkpoint and Next Checkpoint
-        if (CurrentCheckpoint)
+        // Adjust SpeedModifier based on DisplaySpeed and TargetSpeed
+        if (TargetSpeed > 0) // Ensure TargetSpeed is valid
         {
-            GEngine->AddOnScreenDebugMessage(8, 5.f, FColor::Red, FString::Printf(TEXT("Current Checkpoint: %s"), *CurrentCheckpoint->GetName()));
-            GEngine->AddOnScreenDebugMessage(9, 5.f, FColor::Red, FString::Printf(TEXT("Next Checkpoint: %s"), *NextCheckpoint->GetName()));
+            float compSpeed = GetVehicleMovement()->GetForwardSpeed();
+            compSpeed = FMath::Abs(compSpeed) / 1280.0f;
+            compSpeed = FMath::RoundToFloat(compSpeed * 10) / 10;
+            float SpeedDifference = compSpeed - TargetSpeed;
+            SpeedModifier = FMath::Clamp(1.0f - (SpeedDifference / TargetSpeed), 0.1f, 1.0f);
+            GEngine->AddOnScreenDebugMessage(10, 5.f, FColor::Red, FString::Printf(TEXT("SpeedModifier: %f"), SpeedModifier));
+            GEngine->AddOnScreenDebugMessage(11, 5.f, FColor::Red, FString::Printf(TEXT("ActualSpeed: %f"), compSpeed));
+            GEngine->AddOnScreenDebugMessage(12, 5.f, FColor::Red, FString::Printf(TEXT("TargetSpeed: %f"), TargetSpeed));
+        }
+        else
+        {
+            SpeedModifier = 1.0f; // Default to 1.0 if TargetSpeed is invalid
         }
         
         // Rotate the car towards the target point
@@ -379,7 +409,7 @@ void ABaseChaosCar::Tick(float DeltaTime)
         FVector TargetDirection = TargetLocation - GetActorLocation();
         TargetDirection.Normalize();
         FRotator TargetRotation = TargetDirection.Rotation();
-        TargetRotation.Yaw -= 90.0f;
+        TargetRotation.Yaw -= 0.0f;
         FRotator CurrentRotation = GetActorRotation();
 
         // Get distance from the current location to the target location
@@ -392,24 +422,58 @@ void ABaseChaosCar::Tick(float DeltaTime)
         // Check if the absolute value of the yaw is greater than a value
         if (AbsoluteDeltaYaw <= 10)
         {
-            DriveForward(1.0f);
-            UE_LOG(LogTemp, Warning, TEXT("Driving forward"));
+            DriftDelayTimer = 0.0f;
+            DriveForward(1.0f * SpeedModifier);
+            if (bIsDrifting)
+            {
+                StopDrift();
+            }
         }
         else
         {
-            DriveForward(0.1f);
-            UE_LOG(LogTemp, Warning, TEXT("Driving slow"));
+            if(AbsoluteDeltaYaw >= 50)
+            {
+                DriftDelayTimer += DeltaTime;
+                if (DriftDelayTimer > DriftDelay)
+                {
+                    Drift();
+                }
+            }
+            DriveForward(0.2f * SpeedModifier);
         }
         if (DeltaYaw > 3)
         {
             Turning(TurnValue);
-            UE_LOG(LogTemp, Warning, TEXT("Turning right"));
         }
         else if (DeltaYaw < -3)
         {
             Turning(-TurnValue);
-            UE_LOG(LogTemp, Warning, TEXT("Turning left"));
         }
+
+        // Check if the car is on its side or upside down then reset it
+        FRotator CarRotation = GetActorRotation();
+        if (CarRotation.Pitch > 45.0f || CarRotation.Pitch < -45.0f || CarRotation.Roll > 45.0f || CarRotation.Roll < -45.0f)
+        {
+            ResetCar(StoredPosition, StoredRotation);
+            UE_LOG(LogTemp, Warning, TEXT("Car is on its side or upside down, resetting position"));
+        }
+
+        // Check if the car is motionless, if so begin the teleport cooldown
+        if (GetVehicleMovement()->GetForwardSpeed() < 10.0f && GetVehicleMovement()->GetCurrentGear() > 0)
+        {
+            AIResetTimer += DeltaTime;
+            if (AIResetTimer > 1.5)
+            {
+                    ResetCar(StoredPosition, StoredRotation);
+                    AIResetTimer = 0.0f;
+                    UE_LOG(LogTemp, Warning, TEXT("Car is motionless, resetting position"));
+            }
+        }
+        else
+        {
+            AIResetTimer = 0.0f;
+        }
+        
     }
 }
 
@@ -419,24 +483,34 @@ void ABaseChaosCar::BeginPlay()
     Super::BeginPlay();
     CarRoot = Cast<UPrimitiveComponent>(GetRootComponent());
 
+    StoredPosition = GetActorLocation();
+    StoredRotation = GetActorRotation();
+
     // Find the CheckpointManager
-    for (TActorIterator<ACheckpointManager> It(GetWorld()); It; ++It)
+    TArray<AActor*> CheckpointManagers;
+    UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACheckpointManager::StaticClass(), CheckpointManagers);
+    if (CheckpointManagers.Num() > 0)
     {
-        CheckpointManager = *It;
-        break;
+        CheckpointManager = Cast<ACheckpointManager>(CheckpointManagers[0]);
     }
-    if (CheckpointManager && CheckpointManager->Checkpoints.Num() > 0)
+    else
     {
-        CurrentCheckpoint = CheckpointManager->Checkpoints[0];
-        NextCheckpoint = CheckpointManager->Checkpoints.Num() > 1 ? CheckpointManager->Checkpoints[1] : nullptr;
-        if (IsAI && NextCheckpoint)
+        UE_LOG(LogTemp, Error, TEXT("No CheckpointManager found in the level"));
+    }
+    
+    if (CheckpointManager && CheckpointManager->SpawnedCheckpoints.Num() > 0)
+    {
+        CurrentCheckpoint = CheckpointManager->SpawnedCheckpoints[0];
+        CheckpointLimit = CheckpointManager->NumberOfCheckpoints;
+        NextCheckpoint = CheckpointManager->SpawnedCheckpoints[1];
+        if (IsAI && CurrentCheckpoint)
         {
-            TargetPoint = NextCheckpoint->GetAiTargetPoint(IsAISmart, LocationDeviation);
+            TargetPoint = CurrentCheckpoint->GetAiTargetPoint(IsAISmart, LocationDeviation);
         }
     }
     else
     {
-        UE_LOG(LogTemp, Error, TEXT("No CheckpointManager found or no checkpoints available"));
+        UE_LOG(LogTemp, Error, TEXT("No CheckpointManager found or no checkpoint available"));
     }
 
     // AI Disabling
@@ -473,35 +547,42 @@ bool ABaseChaosCar::CheckTeleportCooldown()
     }
 }
 
-void ABaseChaosCar::UpdateCheckpointCounter(int Checkpoint, FVector RespawnPoint, FRotator RespawnRotation)
+void ABaseChaosCar::UpdateCheckpointCounter(int Checkpoint, FVector CheckpointRespawnPoint, FRotator CheckpointRespawnRotation)
 {
     if (LapCounter == 3 && Checkpoint == 0)
     {
-        //load main menu level
+        // Load main menu level
     }
-    if (Checkpoint == CheckpointCounter + 1 || Checkpoint == CheckpointCounter + 2)
+
+    if (Checkpoint == (CheckpointCounter + 1) % CheckpointLimit || Checkpoint == (CheckpointCounter + 2) % CheckpointLimit)
     {
-        if (CheckpointCounter >= CheckpointLimit)
+        if (CheckpointCounter >= CheckpointLimit - 1)
         {
             CompleteLap(InternalTimer);
         }
         else
         {
-            CheckpointCounter++;
+            CheckpointCounter = (CheckpointCounter + 1) % CheckpointLimit;
         }
-        StoredPosition = RespawnPoint;
-        StoredRotation = RespawnRotation;
     }
-    else if (Checkpoint != CheckpointCounter && CheckpointCounter != 0 && Checkpoint < CheckpointLimit)
+    else if (Checkpoint == (CheckpointCounter + 1) % CheckpointLimit || Checkpoint == (CheckpointCounter + 2) % CheckpointLimit)
     {
         ResetCar(StoredPosition, StoredRotation);
+        UE_LOG(LogTemp, Warning, TEXT("Car is not in the correct checkpoint"));
+        // exit function
+        return;
     }
+    UpdateCheckpoint(IsAISmart);
 }
 
-void ABaseChaosCar::ResetCar(FVector RespawnPoint, FRotator RespawnRotation)
+void ABaseChaosCar::ResetCar(FVector CheckpointRespawnPoint, FRotator CheckpointRespawnRotation)
 {
-    SetActorRotation(RespawnRotation);
-    SetActorLocation(RespawnPoint);
+    // Teleport the car to the target actor's location and rotation
+    CarRoot->SetWorldLocation(CheckpointRespawnPoint, false, nullptr, ETeleportType::TeleportPhysics);
+    CarRoot->SetWorldRotation(CheckpointRespawnRotation, false, nullptr, ETeleportType::TeleportPhysics);
+    // Remove all momentum
+    CarRoot->SetPhysicsLinearVelocity(FVector::ZeroVector);
+    CarRoot->SetPhysicsAngularVelocityInDegrees(FVector::ZeroVector);
 }
 
 void ABaseChaosCar::Turning(float Value)

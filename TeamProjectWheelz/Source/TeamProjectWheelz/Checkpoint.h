@@ -16,6 +16,10 @@ public:
 	// Sets default values for this actor's properties
 	ACheckpoint();
 
+	// Get box height
+	UFUNCTION(BlueprintCallable, Category = "Checkpoint")
+	float GetBoxHeight() const { return MyBox->GetScaledBoxExtent().Z; }
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -40,6 +44,10 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	//Checkpoint AI Target Speed
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Checkpoint")
+	float TargetSpeed = 2.0f;
 
 	//Checkpoint Number
 	UPROPERTY(EditAnywhere, Category = "Checkpoint")

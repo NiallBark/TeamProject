@@ -9,14 +9,25 @@
   <component name="ChangeListManager">
     <list default="true" id="5d52e117-dac4-4453-b882-9eb061d187e8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TeamProjectWheelz.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TeamProjectWheelz.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Binaries/Win64/UnrealEditor-TeamProjectWheelz-1725.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Binaries/Win64/UnrealEditor-TeamProjectWheelz-1725.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Binaries/Win64/UnrealEditor.modules" beforeDir="false" afterPath="$PROJECT_DIR$/Binaries/Win64/UnrealEditor.modules" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Pawns/BP_BaseChaosCar.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Pawns/BP_BaseChaosCar.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Levels/BaseLevel/7/F1/1OU79SF9DIOF74GLKP7BKR.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Levels/BaseLevel/7/F1/1OU79SF9DIOF74GLKP7BKR.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Levels/BaseLevel/0/AB/UIOM4082K8ONJAI9PB5DLC.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Levels/BaseLevel/1/49/80WGSUE5GIAEZJJ0SEFLYG.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Levels/BaseLevel/1/J0/XM9N1I4MGA0BOKH0SYMLC3.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Levels/BaseLevel/2/BR/U5TLYQ02MHH7HA25MVPNEE.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Levels/BaseLevel/4/E8/NC2CNO5WMPR626TH6SW0JN.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Levels/BaseLevel/5/7J/BVC7HP3QY4HNPV9CCVXVEM.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Levels/BaseLevel/8/O1/UK7ZJ3UXFMWYGRFBKUJR3I.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Levels/BaseLevel/8/O1/UK7ZJ3UXFMWYGRFBKUJR3I.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Levels/BaseLevel/8/O4/HIQYFDPH7EIKL5DCOC1V2K.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Levels/BaseLevel/8/O4/HIQYFDPH7EIKL5DCOC1V2K.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Levels/BaseLevel/9/1Y/46NYC6LG0O291TR7LPT54S.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Levels/BaseLevel/9/GZ/J2HGI9KSMGNF0WZ72MB0EB.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Levels/BaseLevel/D/FP/G6X7HG3HP6XEMOABOVUJTS.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Levels/BaseLevel/E/HI/WJFH9NG3JQ3JPGBYLPM4NZ.uasset" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/SourceFileCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/SourceFileCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/ActionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/ActionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/TeamProjectWheelzEditor/Development/TeamProjectWheelzEditor.uhtmanifest" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/TeamProjectWheelzEditor/Development/TeamProjectWheelzEditor.uhtmanifest" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/TeamProjectWheelz/UHT/BaseChaosCar.gen.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/TeamProjectWheelz/UHT/BaseChaosCar.gen.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/TeamProjectWheelz/UHT/BaseChaosCar.generated.h" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/TeamProjectWheelz/UHT/BaseChaosCar.generated.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/TeamProjectWheelz/UHT/TeamProjectWheelz.init.gen.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/TeamProjectWheelz/UHT/TeamProjectWheelz.init.gen.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/TeamProjectWheelz/UHT/Timestamp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/TeamProjectWheelz/UHT/Timestamp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/TeamProjectWheelzEditor/Development/DependencyCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/TeamProjectWheelzEditor/Development/DependencyCache.bin" afterDir="false" />
@@ -35,25 +46,64 @@
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/TeamProjectWheelz/Teleporter.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/TeamProjectWheelz/Teleporter.cpp.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/TeamProjectWheelz/Teleporter.gen.cpp.dep.json" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/TeamProjectWheelz/Teleporter.gen.cpp.dep.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/TeamProjectWheelz/Teleporter.gen.cpp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/TeamProjectWheelz/Teleporter.gen.cpp.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/TeamProjectWheelz/UnrealEditor-TeamProjectWheelz.dll.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/TeamProjectWheelz/UnrealEditor-TeamProjectWheelz.dll.rsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/TeamProjectWheelz/UnrealEditor-TeamProjectWheelz.dll.rsp.old" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/TeamProjectWheelz/UnrealEditor-TeamProjectWheelz.dll.rsp.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/TeamProjectWheelz/UnrealEditor-TeamProjectWheelz.lib.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/TeamProjectWheelz/UnrealEditor-TeamProjectWheelz.lib.rsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/TeamProjectWheelz/UnrealEditor-TeamProjectWheelz.lib.rsp.old" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/TeamProjectWheelz/UnrealEditor-TeamProjectWheelz.lib.rsp.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/CachedAssetRegistry_0.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/CachedAssetRegistry_0.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saved/AutoScreenshot.png" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/AutoScreenshot.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saved/Autosaves/Game/Pawns/BP_BaseChaosCar_Auto1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/Autosaves/Game/Pawns/BP_BaseChaosCar_Auto1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Autosaves/Game/__ExternalActors__/Levels/BaseLevel/D/FP/G6X7HG3HP6XEMOABOVUJTS_Auto1.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/Autosaves/Game/__ExternalActors__/Levels/BaseLevel/D/FP/G6X7HG3HP6XEMOABOVUJTS_Auto1.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-113E75F04BFAC02CA68B2CB2E392F7BD/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-1683A29347A15572A12D71BBB81AE492/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-1D22FED143126A8258AF7FBE4F891BBA/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-1F235D444BC2D7FF3655ECA626AAD007/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-360B532D4C2A6E63BEDF80AF11FD5FA5/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-3E9F1A294CB8DFB7151C0C9EE0DC0D4C/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-57791DA546D3ADA39C76AFAE8A0ACCE1/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-6F4289004BA3B32C0E428196191640FE/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-70A5EEA9434EA04204678D842E825A3A/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-753EE17645F948EB52598FB91426BD01/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-7BC36D01470FE8E63F6768B8E4346743/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-84F202E54E48FEDB40F9F390FB59BC0C/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-8A8317FB462F14DDEF6B33A6CE767715/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-8F20AE26428B53D1FB7E9FBA034F562C/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-918A94C24FA6D27EABA582AE344E834B/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-92FD8EE945187D2DE0BC5D9659B6ECF1/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-97E4D88F4F4B984A7D432DAB761D37DF/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-9D43E0D648427348537279BE5D32C1AA/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-A8E881F74B929624D4BC72874042092A/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-AAD43A4045D219A005147A8DACA52EFB/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-B171CE8A4541A49255D407815DFB2555/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-B299D00C485E2662BD0412BEF3ABB827/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-B69324A24C39C204BA0D29AD60FBC278/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-C6A0D9E9420CB6731E3AC095BF417A85/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-D230BCDC4FD8B92AB70F42917BBD0C73/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-D74FC58948AD5343C01DBB8B1527A1B7/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-F047C831461E1A5DF0F31A8A9529B10D/CrashReportClient.ini" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Saved/Config/WindowsEditor/EditorPerProjectUserSettings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/Config/WindowsEditor/EditorPerProjectUserSettings.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz-backup-2025.03.11-23.54.59.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz-backup-2025.03.26-10.59.20.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz-backup-2025.03.27-09.36.28.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz-backup-2025.03.27-13.05.09.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz-backup-2025.03.15-17.58.29.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz-backup-2025.03.17-03.05.04.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz-backup-2025.03.17-03.21.04.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz-backup-2025.03.20-00.44.30.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz-backup-2025.03.26-09.58.43.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz-backup-2025.04.01-17.38.01.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz-backup-2025.04.01-18.26.34.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz-backup-2025.04.03-01.58.01.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz-backup-2025.04.03-02.05.58.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz-backup-2025.04.03-02.16.05.log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz.log" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz_2-backup-2025.03.17-04.33.33.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz_2-backup-2025.03.20-09.14.43.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz_2-backup-2025.04.01-17.38.01.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz_2-backup-2025.04.02-03.01.43.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz_2-backup-2025.04.03-02.03.52.log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz_2.log" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz_2.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz_3.log" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/Logs/TeamProjectWheelz_3.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saved/SourceControl/UncontrolledChangelists.json" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/SourceControl/UncontrolledChangelists.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saved/Telemetry/Telemetry.json" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/Telemetry/Telemetry.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/TeamProjectWheelz/BaseChaosCar.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TeamProjectWheelz/BaseChaosCar.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/TeamProjectWheelz/BaseChaosCar.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TeamProjectWheelz/BaseChaosCar.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TeamProjectWheelz/Checkpoint.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TeamProjectWheelz/Checkpoint.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TeamProjectWheelz/CheckpointManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TeamProjectWheelz/CheckpointManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/TeamProjectWheelz/CheckpointManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/TeamProjectWheelz/CheckpointManager.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,9 +115,11 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Source/TeamProjectWheelz/BaseChaosCar.cpp" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/TeamProjectWheelz/BaseChaosCar.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TeamProjectWheelz/BaseChaosCar.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/TeamProjectWheelz/BoostPad.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Source/TeamProjectWheelz/BoostPad.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TeamProjectWheelz/BoostPad.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TeamProjectWheelz/Checkpoint.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Source/TeamProjectWheelz/CheckpointManager.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/TeamProjectWheelz/Teleporter.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/TeamProjectWheelz/Teleporter.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../TeamProjectBackup/TeamProjectWheelz/Source/TeamProjectWheelz/BoostPad.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -90,7 +142,7 @@
   &quot;keyToString&quot;: {
     &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;More-Car-Updates&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;AI-Cars&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -186,6 +238,8 @@
       <workItem from="1743529539802" duration="15002000" />
       <workItem from="1743645317715" duration="480000" />
       <workItem from="1743646948830" duration="12240000" />
+      <workItem from="1744216198267" duration="385000" />
+      <workItem from="1744218530285" duration="584000" />
     </task>
     <servers />
   </component>

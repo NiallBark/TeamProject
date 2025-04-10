@@ -47,7 +47,19 @@ protected:
 
     // Target Speed
     UPROPERTY(EditAnywhere, Category = "AI");
-    float TargetSpeed = 2.0f;
+    float TargetSpeed = 1.6f;
+
+    // AI Speed Modifier
+    float SpeedModifier = 1.0f;
+
+    // AI Reset Timer for when the AI is stuck
+    UPROPERTY(EditAnywhere, Category = "AI");
+    float AIResetTimer = 0.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
+    float DriftDelay = 0.1f; // Delay in seconds before AI starts drifting
+
+    float DriftDelayTimer = 0.0f; // Internal timer to track the delay
 
     // Target point for the AI to move towards
     UPROPERTY(EditAnywhere, Category = "AI");
@@ -115,7 +127,7 @@ protected:
 
     // Checkpoint Limit
     UPROPERTY(EditAnywhere, Category = "Others")
-    int CheckpointLimit = 33;
+    int CheckpointLimit = 9;
 
     UPrimitiveComponent* CarRoot;
 
@@ -173,6 +185,14 @@ public:
     UPROPERTY(BlueprintReadWrite, Category = "Others")
     int LapCounter = 1;
 
+    // Respawn Point
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
+    FVector RespawnPoint;
+
+    // Respawn Rotation
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
+    FRotator RespawnRotation;
+
     // References to the spawned Niagara components
     UPROPERTY()
     UNiagaraComponent* BackLeftTireFXComponent;
@@ -197,7 +217,7 @@ public:
     virtual void UpdateCheckpointCounter(int Checkpoint, FVector RespawnPoint, FRotator RespawnRotation);
 
     // Reset Car with both position and rotation
-    virtual void ResetCar(FVector RespawnPoint, FRotator RespawnRotation);
+    virtual void ResetCar(FVector CheckpointRespawnPoint, FRotator CheckpointRespawnRotation);
     
     // Expose Turning function to Blueprints
     UFUNCTION(BlueprintCallable, Category = "Car")
