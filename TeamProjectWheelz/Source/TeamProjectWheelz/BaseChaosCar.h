@@ -27,11 +27,19 @@ protected:
     virtual void BeginPlay() override;
 
     // AI Check
-    UPROPERTY(EditAnywhere, Category = "AI")
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
     bool IsAI = false;
 
     UPROPERTY(EditAnywhere, Category = "AI");
     bool IsAISmart = false;
+
+    // AI Random Body Colour
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI");
+	FLinearColor AIColour = FLinearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+	// AI Random Secondary Colour
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI");
+	FLinearColor AISecondaryColour = FLinearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
     // Chance for the AI to take a shortcut from 0 to 10
     UPROPERTY(EditAnywhere, Category = "AI");
@@ -121,10 +129,6 @@ protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Others")
     int BestLapTime = 0;
 
-    // Checkpoint Counter
-    UPROPERTY(EditAnywhere, Category = "Others")
-    int CheckpointCounter = 0;
-
     // Checkpoint Limit
     UPROPERTY(EditAnywhere, Category = "Others")
     int CheckpointLimit = 9;
@@ -185,6 +189,14 @@ public:
     UPROPERTY(BlueprintReadWrite, Category = "Others")
     int LapCounter = 1;
 
+    // Checkpoint Counter
+    UPROPERTY(EditAnywhere, Category = "Others")
+    int CheckpointCounter = 0;
+
+	// Race Position
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
+	int RacePosition = 0;
+
     // Respawn Point
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
     FVector RespawnPoint;
@@ -192,6 +204,14 @@ public:
     // Respawn Rotation
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
     FRotator RespawnRotation;
+
+    // Car ID Given By The CheckpointManager
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Car")
+    int CarID = 0;
+
+    // Distance to the next checkpoint
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Car")
+    float DistanceToNextCheckpoint = 0.0f;
 
     // References to the spawned Niagara components
     UPROPERTY()

@@ -3,6 +3,7 @@
 #include "Engine/World.h"
 #include "EngineUtils.h" // For TActorIterator
 #include "Checkpoint.h"  // Include the ACheckpoint class
+#include "BaseChaosCar.h"
 
 // Sets default values
 ACheckpointManager::ACheckpointManager()
@@ -131,11 +132,55 @@ void ACheckpointManager::OnConstruction(const FTransform& Transform)
 // Called when the game starts or when spawned
 void ACheckpointManager::BeginPlay()
 {
+	int CarIDNum = 0;
     Super::BeginPlay();
+	// Fill up the CarData array with the number of cars
+	for (TActorIterator<ABaseChaosCar> It(GetWorld()); It; ++It)
+	{
+		ABaseChaosCar* Car = *It;
+		if (Car)
+		{
+			FCarData CarData;
+			//Set CarID to the current index of the loop
+            CarData.CarID = CarIDNum;
+			CarIDNum++;
+			Car->CarID = CarData.CarID;
+			CarData.DistanceToNextCheckpoint = Car->DistanceToNextCheckpoint;
+			CarData.CheckpointCounter = Car->CheckpointCounter;
+			CarData.LapCounter = Car->LapCounter;
+			CarData.Position = 0; // Initialize position to 0 or any other default value
+			CarDataArray.Add(CarData);
+		}
+	}
 }
 
 // Called every frame
 void ACheckpointManager::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
+
+    // Sort the CarDataArray based on LapCounter, CheckpointCounter, and DistanceToNextCheckpoint
+    CarDataArray.Sort([](const FCarData& A, const FCarData& B)
+        {
+            // Sort by LapCounter (descending)
+            if (A.LapCounter != B.LapCounter)
+            {
+                return A.LapCounter > B.LapCounter;
+            }
+
+            // If LapCounter is the same, sort by CheckpointCounter (descending)
+            if (A.CheckpointCounter != B.CheckpointCounter)
+            {
+                return A.CheckpointCounter > B.CheckpointCounter;
+            }
+
+            // If both LapCounter and CheckpointCounter are the same, sort by DistanceToNextCheckpoint (ascending)
+            return A.DistanceToNextCheckpoint < B.DistanceToNextCheckpoint;
+        });
+
+    // Assign position values based on the sorted order
+    for (int32 Index = 0; Index < CarDataArray.Num(); ++Index)
+    {
+        CarDataArray[Index].Position = Index + 1; // Position starts from 1
+    }
 }

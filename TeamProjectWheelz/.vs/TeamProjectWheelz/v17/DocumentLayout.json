@@ -1,34 +1,50 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\100627439\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\",
+  "WorkspaceRootPath": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\100627439\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BaseChaosCar.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Source\\TeamProjectWheelz\\BaseChaosCar.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\CheckpointManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Source\\TeamProjectWheelz\\CheckpointManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\100627439\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\TeamProjectWheelz.Build.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Source\\TeamProjectWheelz\\TeamProjectWheelz.Build.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\Teleporter.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Source\\TeamProjectWheelz\\Teleporter.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\100627439\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BaseChaosCar.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BaseChaosCar.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Source\\TeamProjectWheelz\\BaseChaosCar.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\100627439\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BoostPad.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\CheckpointManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Source\\TeamProjectWheelz\\CheckpointManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BaseChaosCar.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Source\\TeamProjectWheelz\\BaseChaosCar.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\Checkpoint.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Source\\TeamProjectWheelz\\Checkpoint.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\Checkpoint.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Source\\TeamProjectWheelz\\Checkpoint.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\TeamProjectWheelz.Build.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Source\\TeamProjectWheelz\\TeamProjectWheelz.Build.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BoostPad.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Source\\TeamProjectWheelz\\BoostPad.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\100627439\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BoostPad.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BoostPad.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Source\\TeamProjectWheelz\\BoostPad.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\100627439\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\Teleporter.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\Teleporter.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Source\\TeamProjectWheelz\\Teleporter.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\100627439\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\Teleporter.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Source\\TeamProjectWheelz\\Teleporter.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,28 +54,67 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Teleporter.cpp",
-              "DocumentMoniker": "C:\\Users\\100627439\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\Teleporter.cpp",
-              "RelativeDocumentMoniker": "Source\\TeamProjectWheelz\\Teleporter.cpp",
-              "ToolTip": "C:\\Users\\100627439\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\Teleporter.cpp",
-              "RelativeToolTip": "Source\\TeamProjectWheelz\\Teleporter.cpp",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAAAGUAAAAuAAAAAAAAAA==",
+              "Title": "Checkpoint.cpp",
+              "DocumentMoniker": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\Checkpoint.cpp",
+              "RelativeDocumentMoniker": "Source\\TeamProjectWheelz\\Checkpoint.cpp",
+              "ToolTip": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\Checkpoint.cpp",
+              "RelativeToolTip": "Source\\TeamProjectWheelz\\Checkpoint.cpp",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-03-26T11:08:11.055Z",
+              "WhenOpened": "2025-04-10T08:23:02.709Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "Checkpoint.h",
+              "DocumentMoniker": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\Checkpoint.h",
+              "RelativeDocumentMoniker": "Source\\TeamProjectWheelz\\Checkpoint.h",
+              "ToolTip": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\Checkpoint.h",
+              "RelativeToolTip": "Source\\TeamProjectWheelz\\Checkpoint.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-04-10T08:23:02.522Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CheckpointManager.cpp",
+              "DocumentMoniker": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\CheckpointManager.cpp",
+              "RelativeDocumentMoniker": "Source\\TeamProjectWheelz\\CheckpointManager.cpp",
+              "ToolTip": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\CheckpointManager.cpp",
+              "RelativeToolTip": "Source\\TeamProjectWheelz\\CheckpointManager.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-04-10T08:22:57.795Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CheckpointManager.h",
+              "DocumentMoniker": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\CheckpointManager.h",
+              "RelativeDocumentMoniker": "Source\\TeamProjectWheelz\\CheckpointManager.h",
+              "ToolTip": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\CheckpointManager.h",
+              "RelativeToolTip": "Source\\TeamProjectWheelz\\CheckpointManager.h",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACcAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-04-10T08:22:57.569Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Teleporter.h",
-              "DocumentMoniker": "C:\\Users\\100627439\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\Teleporter.h",
+              "DocumentMoniker": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\Teleporter.h",
               "RelativeDocumentMoniker": "Source\\TeamProjectWheelz\\Teleporter.h",
-              "ToolTip": "C:\\Users\\100627439\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\Teleporter.h",
+              "ToolTip": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\Teleporter.h",
               "RelativeToolTip": "Source\\TeamProjectWheelz\\Teleporter.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
@@ -68,11 +123,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "BoostPad.cpp",
-              "DocumentMoniker": "C:\\Users\\100627439\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BoostPad.cpp",
+              "DocumentMoniker": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BoostPad.cpp",
               "RelativeDocumentMoniker": "Source\\TeamProjectWheelz\\BoostPad.cpp",
-              "ToolTip": "C:\\Users\\100627439\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BoostPad.cpp",
+              "ToolTip": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BoostPad.cpp",
               "RelativeToolTip": "Source\\TeamProjectWheelz\\BoostPad.cpp",
               "ViewState": "AgIAABIAAAAAAAAAAAAAACcAAABTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
@@ -81,11 +136,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "BoostPad.h",
-              "DocumentMoniker": "C:\\Users\\100627439\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BoostPad.h",
+              "DocumentMoniker": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BoostPad.h",
               "RelativeDocumentMoniker": "Source\\TeamProjectWheelz\\BoostPad.h",
-              "ToolTip": "C:\\Users\\100627439\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BoostPad.h",
+              "ToolTip": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BoostPad.h",
               "RelativeToolTip": "Source\\TeamProjectWheelz\\BoostPad.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
@@ -94,11 +149,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "TeamProjectWheelz.Build.cs",
-              "DocumentMoniker": "C:\\Users\\100627439\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\TeamProjectWheelz.Build.cs",
+              "DocumentMoniker": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\TeamProjectWheelz.Build.cs",
               "RelativeDocumentMoniker": "Source\\TeamProjectWheelz\\TeamProjectWheelz.Build.cs",
-              "ToolTip": "C:\\Users\\100627439\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\TeamProjectWheelz.Build.cs",
+              "ToolTip": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\TeamProjectWheelz.Build.cs",
               "RelativeToolTip": "Source\\TeamProjectWheelz\\TeamProjectWheelz.Build.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -107,13 +162,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "BaseChaosCar.cpp",
-              "DocumentMoniker": "C:\\Users\\100627439\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BaseChaosCar.cpp",
+              "DocumentMoniker": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BaseChaosCar.cpp",
               "RelativeDocumentMoniker": "Source\\TeamProjectWheelz\\BaseChaosCar.cpp",
-              "ToolTip": "C:\\Users\\100627439\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BaseChaosCar.cpp",
+              "ToolTip": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BaseChaosCar.cpp",
               "RelativeToolTip": "Source\\TeamProjectWheelz\\BaseChaosCar.cpp",
-              "ViewState": "AgIAAFcAAAAAAAAAAAAwwHsAAAADAAAAAAAAAA==",
+              "ViewState": "AgIAAHcBAAAAAAAAAAAAAJEBAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-03-06T09:00:37.092Z",
               "EditorCaption": ""
@@ -122,13 +177,26 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "BaseChaosCar.h",
-              "DocumentMoniker": "C:\\Users\\100627439\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BaseChaosCar.h",
+              "DocumentMoniker": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BaseChaosCar.h",
               "RelativeDocumentMoniker": "Source\\TeamProjectWheelz\\BaseChaosCar.h",
-              "ToolTip": "C:\\Users\\100627439\\Desktop\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BaseChaosCar.h",
+              "ToolTip": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\BaseChaosCar.h",
               "RelativeToolTip": "Source\\TeamProjectWheelz\\BaseChaosCar.h",
-              "ViewState": "AgIAAD8AAAAAAAAAAAAAAFcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAAACkAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-03-06T09:00:35.898Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Teleporter.cpp",
+              "DocumentMoniker": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\Teleporter.cpp",
+              "RelativeDocumentMoniker": "Source\\TeamProjectWheelz\\Teleporter.cpp",
+              "ToolTip": "C:\\Temp\\Github\\TeamProject\\TeamProjectWheelz\\Source\\TeamProjectWheelz\\Teleporter.cpp",
+              "RelativeToolTip": "Source\\TeamProjectWheelz\\Teleporter.cpp",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAAAGUAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-03-26T11:08:11.055Z",
               "EditorCaption": ""
             }
           ]

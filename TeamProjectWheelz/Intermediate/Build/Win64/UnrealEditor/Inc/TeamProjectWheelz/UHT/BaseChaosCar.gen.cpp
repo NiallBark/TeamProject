@@ -161,6 +161,26 @@ struct Z_Construct_UClass_ABaseChaosCar_Statics
 		{ "Category", "AI" },
 		{ "ModuleRelativePath", "BaseChaosCar.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_AIColour_MetaData[] = {
+		{ "Category", "AI" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// AI Random Body Colour\n" },
+#endif
+		{ "ModuleRelativePath", "BaseChaosCar.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "AI Random Body Colour" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_AISecondaryColour_MetaData[] = {
+		{ "Category", "AI" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// AI Random Secondary Colour\n" },
+#endif
+		{ "ModuleRelativePath", "BaseChaosCar.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "AI Random Secondary Colour" },
+#endif
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_AIShortcutChance_MetaData[] = {
 		{ "Category", "AI" },
 #if !UE_BUILD_SHIPPING
@@ -367,16 +387,6 @@ struct Z_Construct_UClass_ABaseChaosCar_Statics
 		{ "ToolTip", "Best Lap Time" },
 #endif
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CheckpointCounter_MetaData[] = {
-		{ "Category", "Others" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "// Checkpoint Counter\n" },
-#endif
-		{ "ModuleRelativePath", "BaseChaosCar.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Checkpoint Counter" },
-#endif
-	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CheckpointLimit_MetaData[] = {
 		{ "Category", "Others" },
 #if !UE_BUILD_SHIPPING
@@ -502,6 +512,26 @@ struct Z_Construct_UClass_ABaseChaosCar_Statics
 		{ "ToolTip", "Lap Counter" },
 #endif
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CheckpointCounter_MetaData[] = {
+		{ "Category", "Others" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Checkpoint Counter\n" },
+#endif
+		{ "ModuleRelativePath", "BaseChaosCar.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Checkpoint Counter" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RacePosition_MetaData[] = {
+		{ "Category", "Car" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Race Position\n" },
+#endif
+		{ "ModuleRelativePath", "BaseChaosCar.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Race Position" },
+#endif
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_RespawnPoint_MetaData[] = {
 		{ "Category", "Car" },
 #if !UE_BUILD_SHIPPING
@@ -520,6 +550,26 @@ struct Z_Construct_UClass_ABaseChaosCar_Statics
 		{ "ModuleRelativePath", "BaseChaosCar.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "Respawn Rotation" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CarID_MetaData[] = {
+		{ "Category", "Car" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Car ID Given By The CheckpointManager\n" },
+#endif
+		{ "ModuleRelativePath", "BaseChaosCar.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Car ID Given By The CheckpointManager" },
+#endif
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_DistanceToNextCheckpoint_MetaData[] = {
+		{ "Category", "Car" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// Distance to the next checkpoint\n" },
+#endif
+		{ "ModuleRelativePath", "BaseChaosCar.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Distance to the next checkpoint" },
 #endif
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_BackLeftTireFXComponent_MetaData[] = {
@@ -555,6 +605,8 @@ struct Z_Construct_UClass_ABaseChaosCar_Statics
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_IsAI;
 	static void NewProp_IsAISmart_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_IsAISmart;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_AIColour;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_AISecondaryColour;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_AIShortcutChance;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_AIShortcutRoll;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_LocationDeviation;
@@ -578,7 +630,6 @@ struct Z_Construct_UClass_ABaseChaosCar_Statics
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_InternalTimer;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_DisplayTimer;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_BestLapTime;
-	static const UECodeGen_Private::FIntPropertyParams NewProp_CheckpointCounter;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_CheckpointLimit;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_CheckpointManager;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_CurrentCheckpoint;
@@ -593,8 +644,12 @@ struct Z_Construct_UClass_ABaseChaosCar_Statics
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_BoostFX;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_BoostFXPosition;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_LapCounter;
+	static const UECodeGen_Private::FIntPropertyParams NewProp_CheckpointCounter;
+	static const UECodeGen_Private::FIntPropertyParams NewProp_RacePosition;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_RespawnPoint;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_RespawnRotation;
+	static const UECodeGen_Private::FIntPropertyParams NewProp_CarID;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_DistanceToNextCheckpoint;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_BackLeftTireFXComponent;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_BackRightTireFXComponent;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_BoostFXComponent;
@@ -615,12 +670,14 @@ void Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_IsAI_SetBit(void* Obj)
 {
 	((ABaseChaosCar*)Obj)->IsAI = 1;
 }
-const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_IsAI = { "IsAI", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(ABaseChaosCar), &Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_IsAI_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_IsAI_MetaData), NewProp_IsAI_MetaData) };
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_IsAI = { "IsAI", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(ABaseChaosCar), &Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_IsAI_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_IsAI_MetaData), NewProp_IsAI_MetaData) };
 void Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_IsAISmart_SetBit(void* Obj)
 {
 	((ABaseChaosCar*)Obj)->IsAISmart = 1;
 }
 const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_IsAISmart = { "IsAISmart", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(ABaseChaosCar), &Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_IsAISmart_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_IsAISmart_MetaData), NewProp_IsAISmart_MetaData) };
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_AIColour = { "AIColour", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, AIColour), Z_Construct_UScriptStruct_FLinearColor, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AIColour_MetaData), NewProp_AIColour_MetaData) };
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_AISecondaryColour = { "AISecondaryColour", nullptr, (EPropertyFlags)0x0020080000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, AISecondaryColour), Z_Construct_UScriptStruct_FLinearColor, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AISecondaryColour_MetaData), NewProp_AISecondaryColour_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_AIShortcutChance = { "AIShortcutChance", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, AIShortcutChance), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AIShortcutChance_MetaData), NewProp_AIShortcutChance_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_AIShortcutRoll = { "AIShortcutRoll", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, AIShortcutRoll), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AIShortcutRoll_MetaData), NewProp_AIShortcutRoll_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_LocationDeviation = { "LocationDeviation", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, LocationDeviation), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LocationDeviation_MetaData), NewProp_LocationDeviation_MetaData) };
@@ -650,7 +707,6 @@ const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ABaseChaosCar_S
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_InternalTimer = { "InternalTimer", nullptr, (EPropertyFlags)0x0020080000020005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, InternalTimer), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_InternalTimer_MetaData), NewProp_InternalTimer_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_DisplayTimer = { "DisplayTimer", nullptr, (EPropertyFlags)0x0020080000020005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, DisplayTimer), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DisplayTimer_MetaData), NewProp_DisplayTimer_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_BestLapTime = { "BestLapTime", nullptr, (EPropertyFlags)0x0020080000020005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, BestLapTime), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BestLapTime_MetaData), NewProp_BestLapTime_MetaData) };
-const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_CheckpointCounter = { "CheckpointCounter", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, CheckpointCounter), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CheckpointCounter_MetaData), NewProp_CheckpointCounter_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_CheckpointLimit = { "CheckpointLimit", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, CheckpointLimit), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CheckpointLimit_MetaData), NewProp_CheckpointLimit_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_CheckpointManager = { "CheckpointManager", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, CheckpointManager), Z_Construct_UClass_ACheckpointManager_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CheckpointManager_MetaData), NewProp_CheckpointManager_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_CurrentCheckpoint = { "CurrentCheckpoint", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, CurrentCheckpoint), Z_Construct_UClass_ACheckpoint_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentCheckpoint_MetaData), NewProp_CurrentCheckpoint_MetaData) };
@@ -665,8 +721,12 @@ const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABaseChaosCar_
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_BoostFX = { "BoostFX", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, BoostFX), Z_Construct_UClass_UNiagaraSystem_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BoostFX_MetaData), NewProp_BoostFX_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_BoostFXPosition = { "BoostFXPosition", nullptr, (EPropertyFlags)0x00100000000a000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, BoostFXPosition), Z_Construct_UClass_USceneComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BoostFXPosition_MetaData), NewProp_BoostFXPosition_MetaData) };
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_LapCounter = { "LapCounter", nullptr, (EPropertyFlags)0x0010000000000004, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, LapCounter), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_LapCounter_MetaData), NewProp_LapCounter_MetaData) };
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_CheckpointCounter = { "CheckpointCounter", nullptr, (EPropertyFlags)0x0010000000000001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, CheckpointCounter), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CheckpointCounter_MetaData), NewProp_CheckpointCounter_MetaData) };
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_RacePosition = { "RacePosition", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, RacePosition), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RacePosition_MetaData), NewProp_RacePosition_MetaData) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_RespawnPoint = { "RespawnPoint", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, RespawnPoint), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RespawnPoint_MetaData), NewProp_RespawnPoint_MetaData) };
 const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_RespawnRotation = { "RespawnRotation", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, RespawnRotation), Z_Construct_UScriptStruct_FRotator, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_RespawnRotation_MetaData), NewProp_RespawnRotation_MetaData) };
+const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_CarID = { "CarID", nullptr, (EPropertyFlags)0x0010000000000015, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, CarID), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CarID_MetaData), NewProp_CarID_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_DistanceToNextCheckpoint = { "DistanceToNextCheckpoint", nullptr, (EPropertyFlags)0x0010000000000015, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, DistanceToNextCheckpoint), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_DistanceToNextCheckpoint_MetaData), NewProp_DistanceToNextCheckpoint_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_BackLeftTireFXComponent = { "BackLeftTireFXComponent", nullptr, (EPropertyFlags)0x0010000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, BackLeftTireFXComponent), Z_Construct_UClass_UNiagaraComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BackLeftTireFXComponent_MetaData), NewProp_BackLeftTireFXComponent_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_BackRightTireFXComponent = { "BackRightTireFXComponent", nullptr, (EPropertyFlags)0x0010000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, BackRightTireFXComponent), Z_Construct_UClass_UNiagaraComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BackRightTireFXComponent_MetaData), NewProp_BackRightTireFXComponent_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_BoostFXComponent = { "BoostFXComponent", nullptr, (EPropertyFlags)0x0010000000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ABaseChaosCar, BoostFXComponent), Z_Construct_UClass_UNiagaraComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BoostFXComponent_MetaData), NewProp_BoostFXComponent_MetaData) };
@@ -674,6 +734,8 @@ const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ABaseChaosCar_
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ABaseChaosCar_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_IsAI,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_IsAISmart,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_AIColour,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_AISecondaryColour,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_AIShortcutChance,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_AIShortcutRoll,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_LocationDeviation,
@@ -695,7 +757,6 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ABaseChao
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_InternalTimer,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_DisplayTimer,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_BestLapTime,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_CheckpointCounter,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_CheckpointLimit,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_CheckpointManager,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_CurrentCheckpoint,
@@ -710,8 +771,12 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ABaseChao
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_BoostFX,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_BoostFXPosition,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_LapCounter,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_CheckpointCounter,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_RacePosition,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_RespawnPoint,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_RespawnRotation,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_CarID,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_DistanceToNextCheckpoint,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_BackLeftTireFXComponent,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_BackRightTireFXComponent,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ABaseChaosCar_Statics::NewProp_BoostFXComponent,
@@ -755,14 +820,14 @@ ABaseChaosCar::~ABaseChaosCar() {}
 // End Class ABaseChaosCar
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_Statics
+struct Z_CompiledInDeferFile_FID_Temp_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ABaseChaosCar, ABaseChaosCar::StaticClass, TEXT("ABaseChaosCar"), &Z_Registration_Info_UClass_ABaseChaosCar, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ABaseChaosCar), 116658593U) },
+		{ Z_Construct_UClass_ABaseChaosCar, ABaseChaosCar::StaticClass, TEXT("ABaseChaosCar"), &Z_Registration_Info_UClass_ABaseChaosCar, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ABaseChaosCar), 3606811348U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_1877601539(TEXT("/Script/TeamProjectWheelz"),
-	Z_CompiledInDeferFile_FID_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Temp_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_1398281269(TEXT("/Script/TeamProjectWheelz"),
+	Z_CompiledInDeferFile_FID_Temp_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Temp_Github_TeamProject_TeamProjectWheelz_Source_TeamProjectWheelz_BaseChaosCar_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration

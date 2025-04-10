@@ -26,6 +26,7 @@ ABaseChaosCar::ABaseChaosCar()
     DefaultCameraRotation = FRotator(0.f, 0.f, 0.f);
     OriginalSpringArmRotation = CarSpringArm->GetRelativeRotation();
     DriftTimer = 0.f;
+    DriftTimer = 0.f;
     DriftMaxTime = 5.0f; // Example value, adjust as needed
 
     // Attach the NiagaraFX Components
@@ -230,6 +231,8 @@ void ABaseChaosCar::UpdateCheckpoint(bool IsSmart)
         // Set CheckpointRespawnPoint and CheckpointRespawnRotation
         StoredPosition = CurrentCheckpoint->GetActorLocation();
         StoredRotation = CurrentCheckpoint->GetActorRotation();
+
+		CheckpointManager->CarDataArray[CarID].CheckpointCounter = CheckpointCounter;
         
         CurrentCheckpoint = NextCheckpoint;
         TargetSpeed = CurrentCheckpoint->TargetSpeed;
@@ -257,6 +260,9 @@ void ABaseChaosCar::CompleteLap(float LapTime)
         BestLapTime = LapTime;
     }
     LapCounter++;
+    CheckpointManager->CarDataArray[CarID].LapCounter = LapCounter;
+    // New Lap Debug
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Lap %d Completed!"), LapCounter));
     CheckpointCounter = 0;
     InternalTimer = 0;
 }
@@ -378,9 +384,15 @@ void ABaseChaosCar::Tick(float DeltaTime)
     {
         FVector Start = GetActorLocation();
         FVector End = CurrentCheckpoint->GetActorLocation();
-        FColor LineColor = FColor::Green;
+		DistanceToNextCheckpoint = FVector::Dist(Start, End);
+        CheckpointManager->CarDataArray[CarID].DistanceToNextCheckpoint = DistanceToNextCheckpoint;
+		RacePosition = CheckpointManager->CarDataArray[CarID].Position;
+    }
 
-        DrawDebugLine(GetWorld(), Start, End, LineColor, false, -1.0f, 0, 5.0f);
+    if (!IsAI)
+    {
+        // Print race position Debug
+		GEngine->AddOnScreenDebugMessage(8, 5.f, FColor::Red, FString::Printf(TEXT("RacePosition: %d"), CheckpointCounter));
     }
 
     // AI Logic
@@ -394,9 +406,6 @@ void ABaseChaosCar::Tick(float DeltaTime)
             compSpeed = FMath::RoundToFloat(compSpeed * 10) / 10;
             float SpeedDifference = compSpeed - TargetSpeed;
             SpeedModifier = FMath::Clamp(1.0f - (SpeedDifference / TargetSpeed), 0.1f, 1.0f);
-            GEngine->AddOnScreenDebugMessage(10, 5.f, FColor::Red, FString::Printf(TEXT("SpeedModifier: %f"), SpeedModifier));
-            GEngine->AddOnScreenDebugMessage(11, 5.f, FColor::Red, FString::Printf(TEXT("ActualSpeed: %f"), compSpeed));
-            GEngine->AddOnScreenDebugMessage(12, 5.f, FColor::Red, FString::Printf(TEXT("TargetSpeed: %f"), TargetSpeed));
         }
         else
         {
@@ -513,7 +522,7 @@ void ABaseChaosCar::BeginPlay()
         UE_LOG(LogTemp, Error, TEXT("No CheckpointManager found or no checkpoint available"));
     }
 
-    // AI Disabling
+    // AI Disabling and ohers
     if (CarCamera && CarSpringArm)
     {
         if (IsAI)
@@ -521,6 +530,8 @@ void ABaseChaosCar::BeginPlay()
             CarCamera->SetActive(false);
             CarSpringArm->SetActive(false);
             DisableInput(nullptr);
+			AIColour = FLinearColor(FMath::RandRange(0.0f, 1.0f), FMath::RandRange(0.0f, 1.0f), FMath::RandRange(0.0f, 1.0f), 1.0f);
+            AISecondaryColour = FLinearColor(FMath::RandRange(0.0f, 1.0f), FMath::RandRange(0.0f, 1.0f), FMath::RandRange(0.0f, 1.0f), 1.0f);
         }
         else
         {
