@@ -273,8 +273,10 @@ void ABaseChaosCar::Tick(float DeltaTime)
     int LapScore = LapCounter * 100000000;
     
     RacePositionValue = DistanceScore + CheckpointScore + LapScore;
-    CheckpointManager->CarDataArray[CarID].RacePositionValue = RacePositionValue;
-    
+    if (CheckpointManager)
+    {
+        CheckpointManager->CarDataArray[CarID].RacePositionValue = RacePositionValue;
+    }
     int debugpos = RacePosition;
     FString Suffix;
     
@@ -515,7 +517,10 @@ void ABaseChaosCar::Tick(float DeltaTime)
             AIResetTimer = 0.0f;
         }
     }
-    RacePosition = CheckpointManager->CarDataArray[CarID].Position;
+    if (CheckpointManager)
+    {
+        RacePosition = CheckpointManager->CarDataArray[CarID].Position;
+    }
 }
 
 
@@ -530,6 +535,7 @@ void ABaseChaosCar::BeginPlay()
     // Find the CheckpointManager
     TArray<AActor*> CheckpointManagers;
     UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACheckpointManager::StaticClass(), CheckpointManagers);
+
     if (CheckpointManagers.Num() > 0)
     {
         CheckpointManager = Cast<ACheckpointManager>(CheckpointManagers[0]);
