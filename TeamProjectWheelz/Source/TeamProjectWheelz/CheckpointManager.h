@@ -22,7 +22,7 @@ struct FCheckpointData
 
 	// Used to set the AI's target speed for this checkpoint, this is the trarget speed going toward the checkpoint from the previous one, this one to the next one. Default is 1.6
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Checkpoint", meta = (ClampMin = "0.0", ClampMax = "3.0", UIMin = "0.0", UIMax = "2.0"))
-	float TargetSpeed = 1.6;
+	float TargetSpeed = 2.5;
 
 	// Used to set if the AI will skip the next checkpoint if this is true. Used for the begining of a shortcut, not the end or the part that is skipped. Default is false
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Checkpoint")
