@@ -256,6 +256,10 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
     bool IsAI = false;
 
+    // Reset Car with both position and rotation
+    UFUNCTION(BlueprintCallable, Category = "Car")
+    void ResetCar();
+
 private:
     void LookLeft();
     void LookRight();
@@ -265,8 +269,7 @@ private:
     void StopDrift();
     void UpdateCheckpoint(bool IsSmart);
     void CompleteLap(float);
-    // Reset Car with both position and rotation
-    void ResetCar();
+
    
 
     FRotator DefaultCameraRotation;
