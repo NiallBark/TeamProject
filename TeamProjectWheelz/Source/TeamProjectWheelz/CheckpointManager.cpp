@@ -164,6 +164,7 @@ void ACheckpointManager::BeginPlay()
 		            int RandomIndex = FMath::RandRange(0, StrongAINames.Num() - 1);
 		            Car->DriverName = StrongAINames[RandomIndex];
 		            PositionChecker[CarIDNum - 1].DriverName = StrongAINames[RandomIndex];
+					CarDataArray[CarIDNum - 1].DriverName = StrongAINames[RandomIndex];
 		            StrongAINames.RemoveAt(RandomIndex);                         
 		        }
 		        else
@@ -172,6 +173,7 @@ void ACheckpointManager::BeginPlay()
 		            int RandomIndex = FMath::RandRange(0, WeakAINames.Num() - 1);
 		            Car->DriverName = WeakAINames[RandomIndex];
 		            PositionChecker[CarIDNum - 1].DriverName = WeakAINames[RandomIndex];
+					CarDataArray[CarIDNum - 1].DriverName = WeakAINames[RandomIndex];
 		            WeakAINames.RemoveAt(RandomIndex);
 		        }
 		    }
@@ -208,6 +210,8 @@ void ACheckpointManager::Tick(float DeltaTime)
             if (CarDataArray.IsValidIndex(CarID))
             {
                 CarDataArray[CarID].Position = i + 1; // Set the RacePosition value
+				// Display the RacePosition value
+				GEngine->AddOnScreenDebugMessage(i, 5.f, FColor::Red, FString::Printf(TEXT("Car %d: %s is in position %d. At value: %d"), CarID, *CarDataArray[CarID].DriverName, CarDataArray[CarID].Position, CarDataArray[CarID].RacePositionValue));
             }
         }
     }

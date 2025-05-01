@@ -274,8 +274,6 @@ void ABaseChaosCar::Tick(float DeltaTime)
     
     RacePositionValue = DistanceScore + CheckpointScore + LapScore;
     CheckpointManager->CarDataArray[CarID].RacePositionValue = RacePositionValue;
-    
-    int debugpos = RacePosition;
     FString Suffix;
     
     if (RacePosition % 100 >= 11 && RacePosition % 100 <= 13) // Special case for 11th, 12th, 13th
@@ -341,10 +339,6 @@ void ABaseChaosCar::Tick(float DeltaTime)
         float ForwardSpeed = FVector::DotProduct(Velocity, GetActorForwardVector()); // Speed along forward direction
         float SidewaysSpeed = FVector::DotProduct(Velocity, GetActorRightVector());  // Speed along right direction (sideways drift)
 
-        // Debugging - Display speeds
-        //GEngine->AddOnScreenDebugMessage(4, 5.f, FColor::Red, FString::Printf(TEXT("ForwardSpeed: %f"), ForwardSpeed));
-        //GEngine->AddOnScreenDebugMessage(5, 5.f, FColor::Red, FString::Printf(TEXT("SidewaysSpeed: %f"), SidewaysSpeed));
-
         if (DriftTimer < DriftMaxTime)
         {
             DriftTimer += DeltaTime * (5 * (DefaultFriction - DriftFriction));
@@ -376,15 +370,6 @@ void ABaseChaosCar::Tick(float DeltaTime)
             //GEngine->AddOnScreenDebugMessage(6, 5.f, FColor::Red, TEXT("Applying forward force"));
         }
     }
-
-    //Debug
-    //GEngine->AddOnScreenDebugMessage(0, 5.f, FColor::Red, FString::Printf(TEXT("DriftTimer: %f"), DriftTimer));
-    //GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Red, FString::Printf(TEXT("BoostForce: %f"), 350.0f * (DriftTimer - (DisplaySpeed * 2))));
-    //GEngine->AddOnScreenDebugMessage(2, 5.f, FColor::Red, FString::Printf(TEXT("CurrentFriction: %f"), CurrentFriction));
-    //GEngine->AddOnScreenDebugMessage(3, 5.f, ParticleColor.ToFColor(true), FString::Printf(TEXT("ParticleColor: %s"), *ParticleColor.ToString()));
-
-    //Print VehicleMovementComponent
-    //GEngine->AddOnScreenDebugMessage(7, 5.f, FColor::Red, FString::Printf(TEXT("VehicleMovementComponent: %s"), *GetVehicleMovement()->GetName()));
 
     APlayerController* PlayerController = Cast<APlayerController>(GetController());
     if (PlayerController)
@@ -418,10 +403,16 @@ void ABaseChaosCar::Tick(float DeltaTime)
 		DistanceToNextCheckpoint = FVector::Dist(Start, End);
     }
 
-    if (!IsAI)
+    if (IsAI && TargetPoint != FVector::ZeroVector)
     {
-        // Print race position Debug
-		//GEngine->AddOnScreenDebugMessage(8, 5.f, FColor::Red, FString::Printf(TEXT("RacePosition: %d"), RacePosition));
+        // Draw a debug line from the car's current location to the TargetPoint
+        FVector Start = GetActorLocation();
+        FVector End = TargetPoint;
+        FColor LineColor = FColor::Green; // You can change this color as needed
+        float LineThickness = 2.0f;      // Thickness of the debug line
+        float LineDuration = -1.0f;      // Duration the line stays on screen (-1 for one frame)
+
+        DrawDebugLine(GetWorld(), Start, End, LineColor, false, LineDuration, 0, LineThickness);
     }
 
     // AI Logic
