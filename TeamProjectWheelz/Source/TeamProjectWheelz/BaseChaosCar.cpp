@@ -267,255 +267,270 @@ void ABaseChaosCar::CompleteLap(float LapTime)
 void ABaseChaosCar::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
+	WaitTimer -= DeltaTime;
     
-    int DistanceScore = 10000 - DistanceToNextCheckpoint;
-    int CheckpointScore = CheckpointCounter * 1000000;
-    int LapScore = LapCounter * 100000000;
-    
-    RacePositionValue = DistanceScore + CheckpointScore + LapScore;
-    CheckpointManager->CarDataArray[CarID].RacePositionValue = RacePositionValue;
-    
-    int debugpos = RacePosition;
-    FString Suffix;
-    
-    if (RacePosition % 100 >= 11 && RacePosition % 100 <= 13) // Special case for 11th, 12th, 13th
+    if (WaitTimer <= 0)
     {
-        Suffix = "th";
-    }
-    else
-    {
-        switch (RacePosition % 10)
+        int DistanceScore = 10000 - DistanceToNextCheckpoint;
+        int CheckpointScore = CheckpointCounter * 1000000;
+        int LapScore = LapCounter * 100000000;
+
+        RacePositionValue = DistanceScore + CheckpointScore + LapScore;
+        if (CheckpointManager)
         {
-        case 1: Suffix = "st"; break;
-        case 2: Suffix = "nd"; break;
-        case 3: Suffix = "rd"; break;
-        default: Suffix = "th"; break;
+            CheckpointManager->CarDataArray[CarID].RacePositionValue = RacePositionValue;
         }
-    }
-    
-    DisplayName = FString::Printf(TEXT("%s: %d%s"), *DriverName, RacePosition, *Suffix);
 
-    TeleportCooldownTimer -= DeltaTime;
-    if (TeleportCooldownTimer > 0)
-    {
-        CarSpringArm->bEnableCameraLag = false;
-        CarSpringArm->bEnableCameraRotationLag = false;
-    }
-    else
-    {
-        CarSpringArm->bEnableCameraLag = true;
-        CarSpringArm->bEnableCameraRotationLag = true;
-    }
-    DriftCooldown += DeltaTime;
-    TrueSpeed = GetVehicleMovement()->GetForwardSpeed();
-    DisplaySpeed = FMath::Abs(TrueSpeed) / 1280.0f;
-    DisplaySpeed = FMath::RoundToFloat(DisplaySpeed * 10) / 10;
-    
-    // FOV Camera based on speed
-    if (CarCamera)
-    {
-        CarCamera->FieldOfView = FMath::FInterpTo(CarCamera->FieldOfView, 90.0f + (DisplaySpeed * 10), DeltaTime, 5.0f);
-        // Add motion blur effect based on speed
-        CarCamera->PostProcessSettings.MotionBlurAmount = FMath::FInterpTo(CarCamera->PostProcessSettings.MotionBlurAmount, DisplaySpeed * 10, DeltaTime, 5.0f);
-    }
+        int debugpos = RacePosition;
+        FString Suffix;
 
-    if (!bIsDrifting)
-    {
-        if (CurrentFriction < DefaultFriction)
+        if (RacePosition % 100 >= 11 && RacePosition % 100 <= 13) // Special case for 11th, 12th, 13th
         {
-            CurrentFriction = FMath::FInterpTo(CurrentFriction, DefaultFriction, DeltaTime, 10.0f);
+            Suffix = "th";
         }
         else
         {
-            if (BoostFXComponent && BoostFXComponent->IsActive() && CurrentFriction)
+            switch (RacePosition % 10)
             {
-                BoostFXComponent->Deactivate();
-                BoostFXComponent = nullptr;
-            }
-            CurrentFriction = DefaultFriction;
-        }
-    }
-    else
-    {
-        FVector Velocity = GetVelocity();
-        float ForwardSpeed = FVector::DotProduct(Velocity, GetActorForwardVector()); // Speed along forward direction
-        float SidewaysSpeed = FVector::DotProduct(Velocity, GetActorRightVector());  // Speed along right direction (sideways drift)
-
-        // Debugging - Display speeds
-        //GEngine->AddOnScreenDebugMessage(4, 5.f, FColor::Red, FString::Printf(TEXT("ForwardSpeed: %f"), ForwardSpeed));
-        //GEngine->AddOnScreenDebugMessage(5, 5.f, FColor::Red, FString::Printf(TEXT("SidewaysSpeed: %f"), SidewaysSpeed));
-
-        if (DriftTimer < DriftMaxTime)
-        {
-            DriftTimer += DeltaTime * (5 * (DefaultFriction - DriftFriction));
-        }
-        else
-        {
-            DriftTimer = DriftMaxTime;
-        }
-
-        if (CurrentFriction < DriftingFriction)
-        {
-            CurrentFriction = FMath::FInterpTo(CurrentFriction, DriftingFriction, DeltaTime, 3.0f);
-        }
-        else
-        {
-            CurrentFriction = DriftingFriction;
-        }
-
-        // Apply corrective force if going too slow or drifting sideways too much
-        float MinimumForwardSpeed = 300.f; // Set this value to your desired "slow" speed threshold
-        float SidewaysThreshold = 100.f;   // Set this value to how much sideways drifting is acceptable
-
-        // Check if the car's forward speed is too slow or if it is drifting sideways
-        if (ForwardSpeed < MinimumForwardSpeed || FMath::Abs(SidewaysSpeed) > FMath::Abs(ForwardSpeed) + SidewaysThreshold)
-        {
-            // Apply forward force to speed up the car
-            FVector ForwardForce = GetActorForwardVector() * (MinimumForwardSpeed - ForwardSpeed) * 100.0f;  // Apply force in the forward direction
-            CarRoot->AddImpulse(ForwardForce);
-            //GEngine->AddOnScreenDebugMessage(6, 5.f, FColor::Red, TEXT("Applying forward force"));
-        }
-    }
-
-    //Debug
-    //GEngine->AddOnScreenDebugMessage(0, 5.f, FColor::Red, FString::Printf(TEXT("DriftTimer: %f"), DriftTimer));
-    //GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Red, FString::Printf(TEXT("BoostForce: %f"), 350.0f * (DriftTimer - (DisplaySpeed * 2))));
-    //GEngine->AddOnScreenDebugMessage(2, 5.f, FColor::Red, FString::Printf(TEXT("CurrentFriction: %f"), CurrentFriction));
-    //GEngine->AddOnScreenDebugMessage(3, 5.f, ParticleColor.ToFColor(true), FString::Printf(TEXT("ParticleColor: %s"), *ParticleColor.ToString()));
-
-    //Print VehicleMovementComponent
-    //GEngine->AddOnScreenDebugMessage(7, 5.f, FColor::Red, FString::Printf(TEXT("VehicleMovementComponent: %s"), *GetVehicleMovement()->GetName()));
-
-    APlayerController* PlayerController = Cast<APlayerController>(GetController());
-    if (PlayerController)
-    {
-        bool bIsLookingLeft = PlayerController->IsInputKeyDown(EKeys::Left);
-        bool bIsLookingRight = PlayerController->IsInputKeyDown(EKeys::Right);
-        bool bIsLookingBack = PlayerController->IsInputKeyDown(EKeys::Down);
-
-        if (!bIsLookingLeft && !bIsLookingRight && !bIsLookingBack)
-        {
-            ResetCameraRotation();
-        }
-        else if (bIsLookingLeft)
-        {
-            LookLeft();
-        }
-        else if (bIsLookingRight)
-        {
-            LookRight();
-        }
-        else if (bIsLookingBack)
-        {
-            LookBack();
-        }
-    }
-
-    if (CurrentCheckpoint)
-    {
-        FVector Start = GetActorLocation();
-        FVector End = CurrentCheckpoint->GetActorLocation();
-		DistanceToNextCheckpoint = FVector::Dist(Start, End);
-    }
-
-    if (!IsAI)
-    {
-        // Print race position Debug
-		//GEngine->AddOnScreenDebugMessage(8, 5.f, FColor::Red, FString::Printf(TEXT("RacePosition: %d"), RacePosition));
-    }
-
-    // AI Logic
-    if (IsAI)
-    {
-        // Adjust SpeedModifier based on DisplaySpeed and TargetSpeed
-        if (TargetSpeed > 0) // Ensure TargetSpeed is valid
-        {
-            float compSpeed = GetVehicleMovement()->GetForwardSpeed();
-            compSpeed = FMath::Abs(compSpeed) / 1280.0f;
-            compSpeed = FMath::RoundToFloat(compSpeed * 10) / 10;
-            float SpeedDifference = compSpeed - TargetSpeed;
-            SpeedModifier = FMath::Clamp(1.0f - (SpeedDifference / TargetSpeed), 0.1f, 1.0f);
-        }
-        else
-        {
-            SpeedModifier = 1.0f; // Default to 1.0 if TargetSpeed is invalid
-        }
-        
-        // Rotate the car towards the target point
-        FVector TargetLocation = TargetPoint;
-        TargetLocation.Z = GetActorLocation().Z;
-        FVector TargetDirection = TargetLocation - GetActorLocation();
-        TargetDirection.Normalize();
-        FRotator TargetRotation = TargetDirection.Rotation();
-        TargetRotation.Yaw -= 0.0f;
-        FRotator CurrentRotation = GetActorRotation();
-
-        // Get distance from the current location to the target location
-        float Distance = FVector::Dist(GetActorLocation(), TargetLocation);
-
-        // Find the shortest angle difference between the current and target yaw
-        float DeltaYaw = FMath::FindDeltaAngleDegrees(CurrentRotation.Yaw, TargetRotation.Yaw);
-        float AbsoluteDeltaYaw = FMath::Abs(DeltaYaw);
-        float TurnValue = FMath::Min(AbsoluteDeltaYaw / 10, 1.0f);
-        // Check if the absolute value of the yaw is greater than a value
-        if (AbsoluteDeltaYaw <= 10)
-        {
-            DriftDelayTimer = 0.0f;
-            DriveForward(1.0f * SpeedModifier);
-            if (bIsDrifting)
-            {
-                StopDrift();
+            case 1: Suffix = "st"; break;
+            case 2: Suffix = "nd"; break;
+            case 3: Suffix = "rd"; break;
+            default: Suffix = "th"; break;
             }
         }
+
+        DisplayName = FString::Printf(TEXT("%s: %d%s"), *DriverName, RacePosition, *Suffix);
+
+        TeleportCooldownTimer -= DeltaTime;
+        if (TeleportCooldownTimer > 0)
+        {
+            CarSpringArm->bEnableCameraLag = false;
+            CarSpringArm->bEnableCameraRotationLag = false;
+        }
         else
         {
-            if(AbsoluteDeltaYaw >= 50)
+            CarSpringArm->bEnableCameraLag = true;
+            CarSpringArm->bEnableCameraRotationLag = true;
+        }
+        DriftCooldown += DeltaTime;
+        TrueSpeed = GetVehicleMovement()->GetForwardSpeed();
+        DisplaySpeed = FMath::Abs(TrueSpeed) / 1280.0f;
+        DisplaySpeed = FMath::RoundToFloat(DisplaySpeed * 10) / 10;
+
+        // FOV Camera based on speed
+        if (CarCamera)
+        {
+            CarCamera->FieldOfView = FMath::FInterpTo(CarCamera->FieldOfView, 90.0f + (DisplaySpeed * 10), DeltaTime, 5.0f);
+            // Add motion blur effect based on speed
+            CarCamera->PostProcessSettings.MotionBlurAmount = FMath::FInterpTo(CarCamera->PostProcessSettings.MotionBlurAmount, DisplaySpeed * 10, DeltaTime, 5.0f);
+        }
+
+        if (!bIsDrifting)
+        {
+            if (CurrentFriction < DefaultFriction)
             {
-                DriftDelayTimer += DeltaTime;
-                if (DriftDelayTimer > DriftDelay)
+                CurrentFriction = FMath::FInterpTo(CurrentFriction, DefaultFriction, DeltaTime, 10.0f);
+            }
+            else
+            {
+                if (BoostFXComponent && BoostFXComponent->IsActive() && CurrentFriction)
                 {
-                    Drift();
+                    BoostFXComponent->Deactivate();
+                    BoostFXComponent = nullptr;
+                }
+                CurrentFriction = DefaultFriction;
+            }
+        }
+        else
+        {
+            FVector Velocity = GetVelocity();
+            float ForwardSpeed = FVector::DotProduct(Velocity, GetActorForwardVector()); // Speed along forward direction
+            float SidewaysSpeed = FVector::DotProduct(Velocity, GetActorRightVector());  // Speed along right direction (sideways drift)
+
+            // Debugging - Display speeds
+            //GEngine->AddOnScreenDebugMessage(4, 5.f, FColor::Red, FString::Printf(TEXT("ForwardSpeed: %f"), ForwardSpeed));
+            //GEngine->AddOnScreenDebugMessage(5, 5.f, FColor::Red, FString::Printf(TEXT("SidewaysSpeed: %f"), SidewaysSpeed));
+
+            if (DriftTimer < DriftMaxTime)
+            {
+                DriftTimer += DeltaTime * (5 * (DefaultFriction - DriftFriction));
+            }
+            else
+            {
+                DriftTimer = DriftMaxTime;
+            }
+
+            if (CurrentFriction < DriftingFriction)
+            {
+                CurrentFriction = FMath::FInterpTo(CurrentFriction, DriftingFriction, DeltaTime, 3.0f);
+            }
+            else
+            {
+                CurrentFriction = DriftingFriction;
+            }
+
+            // Apply corrective force if going too slow or drifting sideways too much
+            float MinimumForwardSpeed = 300.f; // Set this value to your desired "slow" speed threshold
+            float SidewaysThreshold = 100.f;   // Set this value to how much sideways drifting is acceptable
+
+            // Check if the car's forward speed is too slow or if it is drifting sideways
+            if (ForwardSpeed < MinimumForwardSpeed || FMath::Abs(SidewaysSpeed) > FMath::Abs(ForwardSpeed) + SidewaysThreshold)
+            {
+                // Apply forward force to speed up the car
+                FVector ForwardForce = GetActorForwardVector() * (MinimumForwardSpeed - ForwardSpeed) * 100.0f;  // Apply force in the forward direction
+                CarRoot->AddImpulse(ForwardForce);
+                //GEngine->AddOnScreenDebugMessage(6, 5.f, FColor::Red, TEXT("Applying forward force"));
+            }
+        }
+
+        //Debug
+        //GEngine->AddOnScreenDebugMessage(0, 5.f, FColor::Red, FString::Printf(TEXT("DriftTimer: %f"), DriftTimer));
+        //GEngine->AddOnScreenDebugMessage(1, 5.f, FColor::Red, FString::Printf(TEXT("BoostForce: %f"), 350.0f * (DriftTimer - (DisplaySpeed * 2))));
+        //GEngine->AddOnScreenDebugMessage(2, 5.f, FColor::Red, FString::Printf(TEXT("CurrentFriction: %f"), CurrentFriction));
+        //GEngine->AddOnScreenDebugMessage(3, 5.f, ParticleColor.ToFColor(true), FString::Printf(TEXT("ParticleColor: %s"), *ParticleColor.ToString()));
+
+        //Print VehicleMovementComponent
+        //GEngine->AddOnScreenDebugMessage(7, 5.f, FColor::Red, FString::Printf(TEXT("VehicleMovementComponent: %s"), *GetVehicleMovement()->GetName()));
+
+        APlayerController* PlayerController = Cast<APlayerController>(GetController());
+        if (PlayerController)
+        {
+            bool bIsLookingLeft = PlayerController->IsInputKeyDown(EKeys::Left);
+            bool bIsLookingRight = PlayerController->IsInputKeyDown(EKeys::Right);
+            bool bIsLookingBack = PlayerController->IsInputKeyDown(EKeys::Down);
+
+            if (!bIsLookingLeft && !bIsLookingRight && !bIsLookingBack)
+            {
+                ResetCameraRotation();
+            }
+            else if (bIsLookingLeft)
+            {
+                LookLeft();
+            }
+            else if (bIsLookingRight)
+            {
+                LookRight();
+            }
+            else if (bIsLookingBack)
+            {
+                LookBack();
+            }
+        }
+
+        if (CurrentCheckpoint)
+        {
+            FVector Start = GetActorLocation();
+            FVector End = CurrentCheckpoint->GetActorLocation();
+            DistanceToNextCheckpoint = FVector::Dist(Start, End);
+        }
+
+        if (!IsAI)
+        {
+            // Print race position Debug
+            //GEngine->AddOnScreenDebugMessage(8, 5.f, FColor::Red, FString::Printf(TEXT("RacePosition: %d"), RacePosition));
+        }
+
+        // AI Logic
+        if (IsAI)
+        {
+			ResetTimer -= DeltaTime;
+			if (ResetTimer <= 0)
+			{
+				ResetCar();
+			}
+            // Adjust SpeedModifier based on DisplaySpeed and TargetSpeed
+            if (TargetSpeed > 0) // Ensure TargetSpeed is valid
+            {
+                float compSpeed = GetVehicleMovement()->GetForwardSpeed();
+                compSpeed = FMath::Abs(compSpeed) / 1280.0f;
+                compSpeed = FMath::RoundToFloat(compSpeed * 10) / 10;
+                float SpeedDifference = compSpeed - TargetSpeed;
+                SpeedModifier = FMath::Clamp(1.0f - (SpeedDifference / TargetSpeed), 0.1f, 1.0f);
+            }
+            else
+            {
+                SpeedModifier = 1.0f; // Default to 1.0 if TargetSpeed is invalid
+            }
+
+            // Rotate the car towards the target point
+            FVector TargetLocation = TargetPoint;
+            TargetLocation.Z = GetActorLocation().Z;
+            FVector TargetDirection = TargetLocation - GetActorLocation();
+            TargetDirection.Normalize();
+            FRotator TargetRotation = TargetDirection.Rotation();
+            TargetRotation.Yaw -= 0.0f;
+            FRotator CurrentRotation = GetActorRotation();
+
+            // Get distance from the current location to the target location
+            float Distance = FVector::Dist(GetActorLocation(), TargetLocation);
+
+            // Find the shortest angle difference between the current and target yaw
+            float DeltaYaw = FMath::FindDeltaAngleDegrees(CurrentRotation.Yaw, TargetRotation.Yaw);
+            float AbsoluteDeltaYaw = FMath::Abs(DeltaYaw);
+            float TurnValue = FMath::Min(AbsoluteDeltaYaw / 10, 1.0f);
+            // Check if the absolute value of the yaw is greater than a value
+            if (AbsoluteDeltaYaw <= 10)
+            {
+                DriftDelayTimer = 0.0f;
+                DriveForward(1.0f * SpeedModifier);
+                if (bIsDrifting)
+                {
+                    StopDrift();
                 }
             }
-            DriveForward(0.2f * SpeedModifier);
-        }
-        if (DeltaYaw > 3)
-        {
-            Turning(TurnValue);
-        }
-        else if (DeltaYaw < -3)
-        {
-            Turning(-TurnValue);
-        }
-
-        // Check if the car is motionless, if so begin the teleport cooldown
-        if (TrueSpeed < 30.0f)
-        {
-            AIResetTimer += DeltaTime;
-            if (AIResetTimer > 2.0)
+            else
             {
+                if (AbsoluteDeltaYaw >= 50)
+                {
+                    DriftDelayTimer += DeltaTime;
+                    if (DriftDelayTimer > DriftDelay)
+                    {
+                        Drift();
+                    }
+                }
+                DriveForward(0.2f * SpeedModifier);
+            }
+            if (DeltaYaw > 3)
+            {
+                Turning(TurnValue);
+            }
+            else if (DeltaYaw < -3)
+            {
+                Turning(-TurnValue);
+            }
+
+            // Check if the car is motionless, if so begin the teleport cooldown
+            if (TrueSpeed < 30.0f)
+            {
+                AIResetTimer += DeltaTime;
+                if (AIResetTimer > 2.0)
+                {
                     ResetCar();
                     AIResetTimer = 0.0f;
                     UE_LOG(LogTemp, Warning, TEXT("Car is motionless, resetting position"));
+                }
             }
-        }        
-        // Check if the car is on its side or upside down, if so begin the teleport cooldown
-        else if (FMath::Abs(GetActorRotation().Pitch) > 80.0f || FMath::Abs(GetActorRotation().Roll) > 80.0f)
-        {
-            AIResetTimer += DeltaTime;
-            if (AIResetTimer > 2.0)
+            // Check if the car is on its side or upside down, if so begin the teleport cooldown
+            else if (FMath::Abs(GetActorRotation().Pitch) > 80.0f || FMath::Abs(GetActorRotation().Roll) > 80.0f)
             {
-                ResetCar();
+                AIResetTimer += DeltaTime;
+                if (AIResetTimer > 2.0)
+                {
+                    ResetCar();
+                    AIResetTimer = 0.0f;
+                    UE_LOG(LogTemp, Warning, TEXT("Car is on its side or upside down, resetting position"));
+                }
+            }
+            else
+            {
                 AIResetTimer = 0.0f;
-                UE_LOG(LogTemp, Warning, TEXT("Car is on its side or upside down, resetting position"));
             }
         }
-        else
+        if (CheckpointManager)
         {
-            AIResetTimer = 0.0f;
+            RacePosition = CheckpointManager->CarDataArray[CarID].Position;
         }
     }
-    RacePosition = CheckpointManager->CarDataArray[CarID].Position;
 }
 
 
@@ -616,10 +631,12 @@ void ABaseChaosCar::UpdateCheckpointCounter(int Checkpoint, FVector CheckpointRe
         return;
     }
     UpdateCheckpoint(IsAISmart);
+	ResetTimer = 10.0f;
 }
 
 void ABaseChaosCar::ResetCar()
 {
+	ResetTimer = 10.0f;
     // Teleport the car to the target actor's location and rotation
     CarRoot->SetWorldLocation(StoredPosition, false, nullptr, ETeleportType::TeleportPhysics);
     CarRoot->SetWorldRotation(StoredRotation, false, nullptr, ETeleportType::TeleportPhysics);
