@@ -1,6 +1,8 @@
+#pragma once
 #include "CheckpointManager.h"
 #include "Components/SplineComponent.h"
 #include "Engine/World.h"
+#include "Kismet/GameplayStatics.h"
 #include "EngineUtils.h" // For TActorIterator
 #include "Checkpoint.h"  // Include the ACheckpoint class
 #include "BaseChaosCar.h"
@@ -140,16 +142,39 @@ void ACheckpointManager::BeginPlay()
 		ABaseChaosCar* Car = *It;
 		if (Car)
 		{
+		    // Add slot to the PositionChecker array
+		    PositionChecker.Add(FPositionChecker());
+		
 			FCarData CarData;
 			//Set CarID to the current index of the loop
             CarData.CarID = CarIDNum;
 			CarIDNum++;
 			Car->CarID = CarData.CarID;
-			CarData.DistanceToNextCheckpoint = Car->DistanceToNextCheckpoint;
-			CarData.CheckpointCounter = Car->CheckpointCounter;
-			CarData.LapCounter = Car->LapCounter;
 			CarData.Position = 0; // Initialize position to 0 or any other default value
 			CarDataArray.Add(CarData);
+			
+			TArray<FString> WeakAINames = WeakDriverNames;
+			TArray<FString> StrongAINames = StrongDriverNames;
+
+		    if (Car->IsAI)
+		    {
+		        if (Car->IsAISmart)
+		        {
+		            //Set a name for the AI dirver
+		            int RandomIndex = FMath::RandRange(0, StrongAINames.Num() - 1);
+		            Car->DriverName = StrongAINames[RandomIndex];
+		            PositionChecker[CarIDNum - 1].DriverName = StrongAINames[RandomIndex];
+		            StrongAINames.RemoveAt(RandomIndex);                         
+		        }
+		        else
+		        {
+		            //Set a name for the AI dirver
+		            int RandomIndex = FMath::RandRange(0, WeakAINames.Num() - 1);
+		            Car->DriverName = WeakAINames[RandomIndex];
+		            PositionChecker[CarIDNum - 1].DriverName = WeakAINames[RandomIndex];
+		            WeakAINames.RemoveAt(RandomIndex);
+		        }
+		    }
 		}
 	}
 }
@@ -158,29 +183,32 @@ void ACheckpointManager::BeginPlay()
 void ACheckpointManager::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
-
-    // Sort the CarDataArray based on LapCounter, CheckpointCounter, and DistanceToNextCheckpoint
-    CarDataArray.Sort([](const FCarData& A, const FCarData& B)
-        {
-            // Sort by LapCounter (descending)
-            if (A.LapCounter != B.LapCounter)
-            {
-                return A.LapCounter > B.LapCounter;
-            }
-
-            // If LapCounter is the same, sort by CheckpointCounter (descending)
-            if (A.CheckpointCounter != B.CheckpointCounter)
-            {
-                return A.CheckpointCounter > B.CheckpointCounter;
-            }
-
-            // If both LapCounter and CheckpointCounter are the same, sort by DistanceToNextCheckpoint (ascending)
-            return A.DistanceToNextCheckpoint < B.DistanceToNextCheckpoint;
-        });
-
-    // Assign position values based on the sorted order
-    for (int32 Index = 0; Index < CarDataArray.Num(); ++Index)
+    // For each value in the PositionChecker array, add in the CarID from the CarData array and then the RacePositionValue
+    for (int32 i = 0; i < PositionChecker.Num(); i++)
     {
-        CarDataArray[Index].Position = Index + 1; // Position starts from 1
+        if (PositionChecker.IsValidIndex(i))
+        {
+            PositionChecker[i].CarID = CarDataArray[i].CarID;
+            PositionChecker[i].RacePositionValue = CarDataArray[i].RacePositionValue;
+        }
+    }
+    
+    // Sort the PositionChecker array based on RacePositionValue
+    PositionChecker.Sort([](const FPositionChecker& A, const FPositionChecker& B)
+    {
+        return A.RacePositionValue > B.RacePositionValue;
+    });
+    
+    // Go through the PositionChecker array and set the RacePosition value in the CarData array
+    for (int32 i = 0; i < PositionChecker.Num(); i++)
+    {
+        if (PositionChecker.IsValidIndex(i))
+        {
+            int32 CarID = PositionChecker[i].CarID;
+            if (CarDataArray.IsValidIndex(CarID))
+            {
+                CarDataArray[CarID].Position = i + 1; // Set the RacePosition value
+            }
+        }
     }
 }

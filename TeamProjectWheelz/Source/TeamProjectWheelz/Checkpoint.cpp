@@ -32,8 +32,6 @@ ACheckpoint::ACheckpoint()
 void ACheckpoint::BeginPlay()
 {
 	Super::BeginPlay();
-
-	Super::BeginPlay();
 	MyBox->OnComponentBeginOverlap.AddDynamic(this, &ACheckpoint::OnOverlap);
 }
 
@@ -52,6 +50,8 @@ void ACheckpoint::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Ot
 		if (LapCounter >= 0)
 		{
 			Cast<ABaseChaosCar>(OtherActor)->UpdateCheckpointCounter(CheckpointNumber, MyBox->GetComponentLocation(), MyBox->GetComponentRotation());
+			Cast<ABaseChaosCar>(OtherActor)->StoredPosition = this->GetActorLocation();
+			Cast<ABaseChaosCar>(OtherActor)->StoredRotation = this->GetActorRotation();
 		}
 		else
 		{
