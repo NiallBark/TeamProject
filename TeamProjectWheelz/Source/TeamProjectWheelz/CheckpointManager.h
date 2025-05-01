@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Components/SplineComponent.h"
@@ -42,21 +41,32 @@ struct FCarData
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
 	int32 CarID;
 
-	// The distance of the car to the next checkpoint, Don't change this unless you know what you're doing
+	// Race position value taken from the car to determine what position the car is in
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
-	float DistanceToNextCheckpoint;
-
-	// The current checkpoint of the car, Don't change this unless you know what you're doing
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
-	int32 CheckpointCounter;
-
-	// The current lap of the car, Don't change this unless you know what you're doing
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
-	int32 LapCounter;
+	float RacePositionValue;
 
 	// The current race position of the car, Don't change this unless you know what you're doing
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
 	int32 Position;
+	
+	// Racer's name
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
+	FString DriverName = "You";
+};
+
+USTRUCT(BlueprintType)
+struct FPositionChecker
+{
+    GENERATED_BODY()
+    // The ID of the car used to identify the car, Don't change this unless you know what you're doing
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
+    int32 CarID;
+    // The taken RacePositionValue from the car to determine what position the car is in
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
+    float RacePositionValue;
+    // Racer's name
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
+    FString DriverName = "You";
 };
 
 UCLASS()
@@ -104,8 +114,132 @@ public:
 	// Array of stored cars, don't change this unless you know what you're doing.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Checkpoint")
 	TArray<FCarData> CarDataArray;
+	
+	// Array for checking what position the cars are in
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Checkpoint")
+	TArray<FPositionChecker> PositionChecker;
 
 	// Spline component for defining checkpoint positions
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Checkpoint")
 	USplineComponent* SplineComponent;
+	
+	// An array of names for the weak AI drivers
+    	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Checkpoint")
+    	TArray<FString> WeakDriverNames = {   TEXT("Blaze Thunder"),
+                                              TEXT("Turbo Max"),
+                                              TEXT("Speedy Wheels"),
+                                              TEXT("Nitro Nate"),
+                                              TEXT("Zoom Zoomerson"),
+                                              TEXT("Rocket Ronny"),
+                                              TEXT("Flash Vroom"),
+                                              TEXT("Lightning Lance"),
+                                              TEXT("Skid McZoom"),
+                                              TEXT("Axel Blaze"),
+                                              TEXT("Jetstream Jimmy"),
+                                              TEXT("Viper Vinnie"),
+                                              TEXT("Crash Boom"),
+                                              TEXT("Blaze McFast"),
+                                              TEXT("Zoomy Zack"),
+                                              TEXT("Drift Danger"),
+                                              TEXT("Nitro Nelly"),
+                                              TEXT("Screech Racer"),
+                                              TEXT("Lightning Logan"),
+                                              TEXT("Turbo Tina"),
+                                              TEXT("Max Overdrive"),
+                                              TEXT("Speedstorm Sammy"),
+                                              TEXT("Sonic Blaze"),
+                                              TEXT("Captain Vroom"),
+                                              TEXT("Rocket Riley"),
+                                              TEXT("Blaze McTurbo"),
+                                              TEXT("Nitro Nick"),
+                                              TEXT("Drift Dingo"),
+                                              TEXT("Fast Freddie"),
+                                              TEXT("Zippy Zoom"),
+                                              TEXT("Hot Rod Hank"),
+                                              TEXT("Crash Carley"),
+                                              TEXT("Axel Zoomer"),
+                                              TEXT("Thunder Wheels"),
+                                              TEXT("Flame Speedster"),
+                                              TEXT("Revvin’ Rex"),
+                                              TEXT("Blaze Bolt"),
+                                              TEXT("Wacky Wheels"),
+                                              TEXT("Drifty Dan"),
+                                              TEXT("Supersonic Sue"),
+                                              TEXT("Flamey McZoom"),
+                                              TEXT("Screamin’ Steve"),
+                                              TEXT("Max Nitro"),
+                                              TEXT("Vrooma Looma"),
+                                              TEXT("Speedy Spark"),
+                                              TEXT("Tire Screech Tommy"),
+                                              TEXT("Nitro Nova"),
+                                              TEXT("Jet Zoomer"),
+                                              TEXT("Dash Danger"),
+                                              TEXT("Rocket Roxy"),
+                                              TEXT("Blaze Machine"),
+                                              TEXT("Crashy Carl"),
+                                              TEXT("Vroomy Vince"),
+                                              TEXT("Twisty Tires"),
+                                              TEXT("Hot Wheel Harry"),
+                                              TEXT("Speedella"),
+                                              TEXT("Dragstrip Drew"),
+                                              TEXT("Zoominator"),
+                                              TEXT("Fasttrack Frankie"),
+                                              TEXT("Burnout Bob"),
+                                              TEXT("Nitro Ninja"),
+                                              TEXT("Sparky Zoom"),
+                                              TEXT("Lightning Lulu"),
+                                              TEXT("Driftstorm Dave"),
+                                              TEXT("Zipper Zap"),
+                                              TEXT("Blaze-a-tron"),
+                                              TEXT("Screechy Pete"),
+                                              TEXT("Hyper Hank"),
+                                              TEXT("Speedy Sally"),
+                                              TEXT("Flaming Finn"),
+                                              TEXT("Thunder Track"),
+                                              TEXT("Axle Axel"),
+                                              TEXT("Fastzilla"),
+                                              TEXT("Turbo Ty"),
+                                              TEXT("Boom Zoom"),
+                                              TEXT("Velocity Vicky"),
+                                              TEXT("Danger Wheels"),
+                                              TEXT("Turbo Tornado"),
+                                              TEXT("Crash Machine"),
+                                              TEXT("Max Vroom"),
+                                              TEXT("Racey Macey"),
+                                              TEXT("Firetrack Finn"),
+                                              TEXT("Dash McZoom"),
+                                              TEXT("Rev Rocket"),
+                                              TEXT("Vroomba"),
+                                              TEXT("Drift Queen"),
+                                              TEXT("Nitro Flash"),
+                                              TEXT("Zoomy Lou"),
+                                              TEXT("Speedbot 3000"),
+                                              TEXT("Crashington"),
+                                              TEXT("Axle X"),
+                                              TEXT("Blaze Tastic"),
+                                              TEXT("Sonic Steve"),
+                                              TEXT("Wheely McSpeed"),
+                                              TEXT("Fast Maxine"),
+                                              TEXT("Rocket Wheels"),
+                                              TEXT("Screecharoo"),
+                                              TEXT("Burnout Brenda"),
+                                              TEXT("The Zoomster"),
+                                              TEXT("Lightning Blazer")};
+                                          
+        // An array of names for the strong AI drivers
+        UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Checkpoint")
+        TArray<FString> StrongDriverNames = {   TEXT("The Kunk"),
+                                                TEXT("Noel Burger"),
+        										TEXT("Kodzuuken"),
+                                                TEXT("Tiny Turtleeee"),
+                                                TEXT("Sunny Bunny"),
+                                                TEXT("Crimson Imp"),
+                                                TEXT("Null 1551")
+                                                TEXT("Big Mon D"),
+                                                TEXT("D_E_B_A_N"),
+                                                TEXT("GR Fournd"),
+                                                TEXT("Jam3s 2004"),
+                                                TEXT("Yuxxi"),
+                                                TEXT("Speedy Eyeball"),
+                                                TEXT("The Heff")};
 };

@@ -26,13 +26,6 @@ protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
 
-    // AI Check
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
-    bool IsAI = false;
-
-    UPROPERTY(EditAnywhere, Category = "AI");
-    bool IsAISmart = false;
-
     // AI Random Body Colour
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI");
 	FLinearColor AIColour = FLinearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -187,7 +180,7 @@ public:
 
     // Lap Counter
     UPROPERTY(BlueprintReadWrite, Category = "Others")
-    int LapCounter = 1;
+    float LapCounter = 1;
 
     // Checkpoint Counter
     UPROPERTY(EditAnywhere, Category = "Others")
@@ -232,12 +225,13 @@ public:
     // Main Particle Color
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
     FLinearColor ParticleColor = FLinearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    
+    // Race Position Value: LapCounter / CheckpointCounter / (1000 - DistanceToNextCheckpoint)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
+    float RacePositionValue;
 
     // Checkpoint Number / Position /
     virtual void UpdateCheckpointCounter(int Checkpoint, FVector RespawnPoint, FRotator RespawnRotation);
-
-    // Reset Car with both position and rotation
-    virtual void ResetCar(FVector CheckpointRespawnPoint, FRotator CheckpointRespawnRotation);
     
     // Expose Turning function to Blueprints
     UFUNCTION(BlueprintCallable, Category = "Car")
@@ -246,6 +240,21 @@ public:
     // Expose DriveForward function to Blueprints
     UFUNCTION(BlueprintCallable, Category = "Car")
     void DriveForward(float Value);
+    
+    // The AI Driver's Name
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
+    FString DriverName = "You";
+    
+    // Display Name
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
+    FString DisplayName = " ";
+    
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI");
+    bool IsAISmart = false;
+
+    // AI Check
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
+    bool IsAI = false;
 
 private:
     void LookLeft();
@@ -256,6 +265,8 @@ private:
     void StopDrift();
     void UpdateCheckpoint(bool IsSmart);
     void CompleteLap(float);
+    // Reset Car with both position and rotation
+    void ResetCar();
    
 
     FRotator DefaultCameraRotation;
