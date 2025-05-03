@@ -70,10 +70,6 @@ protected:
     UPROPERTY(BlueprintReadOnly, Category = "Car")
     float TrueSpeed;
 
-    // Car Display Speed
-    UPROPERTY(BlueprintReadOnly, Category = "Car")
-    float DisplaySpeed;
-
     // The Car's Teleport Cooldown Timer To Prevent Multiple Teleports In The Same Teleporter
     UPROPERTY(BlueprintReadOnly, Category = "Car")
     float TeleportCooldownTimer = 0.1f;
@@ -135,6 +131,8 @@ private:
     class ACheckpoint* CurrentCheckpoint;
     UPROPERTY(EditAnywhere, Category = "AI");
     class ACheckpoint* NextCheckpoint;
+	UPROPERTY(EditAnywhere, Category = "AI");
+	float ResetTimer = 10.0f;
     
 
 public:
@@ -146,6 +144,7 @@ public:
     UPROPERTY(EditAnywhere, Category = "Car")
     float DriftFriction = 1.0f;
 
+
     // Car Drifting Friction
     UPROPERTY(EditAnywhere, Category = "Car")
     float DriftingFriction = 2.0f;
@@ -153,6 +152,14 @@ public:
     // Car Default Friction
     UPROPERTY(EditAnywhere, Category = "Car")
     float DefaultFriction = 4.0f;
+
+    // Wait Timer For Start Of Race
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
+	float WaitTimer = 12.0f;
+
+    // Car Display Speed
+    UPROPERTY(BlueprintReadWrite, Category = "Car")
+    float DisplaySpeed;
 
     // NiagaraFX Component Back Left Tire
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
