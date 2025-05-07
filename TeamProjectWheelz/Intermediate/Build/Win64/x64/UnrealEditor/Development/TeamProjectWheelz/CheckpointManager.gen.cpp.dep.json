@@ -1,0 +1,23 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\git\\teamproject\\teamproject\\teamprojectwheelz\\intermediate\\build\\win64\\unrealeditor\\inc\\teamprojectwheelz\\uht\\checkpointmanager.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\git\\teamproject\\teamproject\\teamprojectwheelz\\intermediate\\build\\win64\\x64\\teamprojectwheelzeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.inclorderoldest.h.pch",
+        "Includes": [
+            "d:\\git\\teamproject\\teamproject\\teamprojectwheelz\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\teamprojectwheelz\\definitions.teamprojectwheelz.h",
+            "d:\\git\\teamproject\\teamproject\\teamprojectwheelz\\source\\teamprojectwheelz\\checkpointmanager.h",
+            "d:\\epic games\\epic games\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\components\\splinecomponent.h",
+            "d:\\epic games\\epic games\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\splinecomponent.generated.h",
+            "d:\\git\\teamproject\\teamproject\\teamprojectwheelz\\source\\teamprojectwheelz\\checkpoint.h",
+            "d:\\epic games\\epic games\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\components\\boxcomponent.h",
+            "d:\\epic games\\epic games\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\components\\shapecomponent.h",
+            "d:\\epic games\\epic games\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\shapecomponent.generated.h",
+            "d:\\epic games\\epic games\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\boxcomponent.generated.h",
+            "d:\\git\\teamproject\\teamproject\\teamprojectwheelz\\intermediate\\build\\win64\\unrealeditor\\inc\\teamprojectwheelz\\uht\\checkpoint.generated.h",
+            "d:\\git\\teamproject\\teamproject\\teamprojectwheelz\\intermediate\\build\\win64\\unrealeditor\\inc\\teamprojectwheelz\\uht\\checkpointmanager.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
