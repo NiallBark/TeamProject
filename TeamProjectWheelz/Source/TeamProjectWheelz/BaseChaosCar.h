@@ -118,10 +118,6 @@ protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Others")
     int BestLapTime = 0;
 
-    // Checkpoint Limit
-    UPROPERTY(EditAnywhere, Category = "Others")
-    int CheckpointLimit = 9;
-
     UPrimitiveComponent* CarRoot;
 
 private:
@@ -193,6 +189,10 @@ public:
     UPROPERTY(EditAnywhere, Category = "Others")
     int CheckpointCounter = 0;
 
+    // Checkpoint Limit
+    UPROPERTY(EditAnywhere, Category = "Others")
+    int CheckpointLimit = 0;
+
 	// Race Position
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
 	int RacePosition = 0;
@@ -212,6 +212,7 @@ public:
     // Distance to the next checkpoint
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Car")
     float DistanceToNextCheckpoint = 0.0f;
+
 
     // References to the spawned Niagara components
     UPROPERTY()
