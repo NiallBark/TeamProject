@@ -144,6 +144,9 @@ void ACheckpointManager::BeginPlay()
 		{
 		    // Add slot to the PositionChecker array
 		    PositionChecker.Add(FPositionChecker());
+
+			// Appply Lap Limit to the Car
+			Car->LapLimit = NumberOfLaps;
 		
 			FCarData CarData;
 			//Set CarID to the current index of the loop

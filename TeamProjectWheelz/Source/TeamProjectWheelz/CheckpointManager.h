@@ -91,6 +91,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Checkpoint")
 	int NumberOfCheckpoints = 0;
 
+	// Number of laps, value is created her in the blueprint
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Checkpoint")
+	int NumberOfLaps = 3;	
+
 	// Reference to the Blueprint class of the Checkpoint
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Checkpoint")
 	TSubclassOf<ACheckpoint> CheckpointBlueprint;

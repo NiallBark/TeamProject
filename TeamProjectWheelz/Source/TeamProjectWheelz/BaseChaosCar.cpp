@@ -249,21 +249,21 @@ void ABaseChaosCar::UpdateCheckpoint(bool IsSmart)
     }
 }
 
-void ABaseChaosCar::CompleteLap(float LapTime)
+void ABaseChaosCar::CompleteLap()
 {
-    if (LapCounter == 3)
+    CheckpointCounter = 0;
+    if (LapCounter == LapLimit)
     {
 		// Load Main Menu
         UGameplayStatics::OpenLevel(GetWorld(), TEXT("StartMenu"));
     }
-    if (LapTime < BestLapTime || BestLapTime == 0)
+    if (InternalTimer < BestLapTime || BestLapTime == 0)
     {
-        BestLapTime = LapTime;
+        BestLapTime = InternalTimer;
     }
     LapCounter++;
     // New Lap Debug
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Lap %d Completed!"), LapCounter));
-    CheckpointCounter = 0;
     InternalTimer = 0;
 }
 
@@ -428,12 +428,6 @@ void ABaseChaosCar::Tick(float DeltaTime)
             DistanceToNextCheckpoint = FVector::Dist(Start, End);
         }
 
-        if (!IsAI)
-        {
-            // Print race position Debug
-            //GEngine->AddOnScreenDebugMessage(8, 5.f, FColor::Red, FString::Printf(TEXT("RacePosition: %d"), RacePosition));
-        }
-
         // AI Logic
         if (IsAI)
         {
@@ -561,7 +555,7 @@ void ABaseChaosCar::BeginPlay()
     if (CheckpointManager && CheckpointManager->SpawnedCheckpoints.Num() > 0)
     {
         CurrentCheckpoint = CheckpointManager->SpawnedCheckpoints[0];
-        CheckpointLimit = CheckpointManager->NumberOfCheckpoints;
+        CheckpointLimit = CheckpointManager->NumberOfCheckpoints -1;
         NextCheckpoint = CheckpointManager->SpawnedCheckpoints[1];
         if (IsAI && CurrentCheckpoint)
         {
@@ -611,17 +605,12 @@ bool ABaseChaosCar::CheckTeleportCooldown()
 
 void ABaseChaosCar::UpdateCheckpointCounter(int Checkpoint, FVector CheckpointRespawnPoint, FRotator CheckpointRespawnRotation)
 {
-    if (LapCounter == 3 && Checkpoint == 0)
+	if (!IsAI)
     {
-        // Load main menu level
-		UGameplayStatics::OpenLevel(GetWorld(), TEXT("StartMenu"));
+        // Debug show Checkpoint and CheckpointCounter
+        GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Checkpoint: %d CheckpointCounter: %d"), Checkpoint, CheckpointCounter));
     }
-	//Debug show Checkpoint and CheckpointCounter
-    if (CheckpointCounter >= CheckpointLimit - 1)
-    {
-        CompleteLap(InternalTimer);
-    }
-	CheckpointCounter = Checkpoint + 1 % CheckpointLimit;
+	CheckpointCounter = Checkpoint % CheckpointLimit;
 	StoredPosition = CheckpointRespawnPoint;
 	StoredRotation = CheckpointRespawnRotation;
     UpdateCheckpoint(IsAISmart);

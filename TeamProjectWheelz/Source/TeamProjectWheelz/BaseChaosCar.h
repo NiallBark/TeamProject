@@ -24,7 +24,7 @@ protected:
     virtual void Tick(float DeltaTime) override;
 
     // Called when the game starts or when spawned
-    virtual void BeginPlay() override;
+    virtual void BeginPlay() override;	
 
     // AI Random Body Colour
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI");
@@ -134,6 +134,7 @@ private:
 public:
     ABaseChaosCar();
     virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	void CompleteLap();
     bool CheckTeleportCooldown();
 
     // Car Inital Drift Friction
@@ -182,8 +183,12 @@ public:
     USceneComponent* BoostFXPosition;
 
     // Lap Counter
-    UPROPERTY(BlueprintReadWrite, Category = "Others")
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
     float LapCounter = 1;
+
+	// Lap Limit
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
+	float LapLimit = 3;
 
     // Checkpoint Counter
     UPROPERTY(EditAnywhere, Category = "Others")
@@ -275,10 +280,7 @@ private:
     void ResetCameraRotation();
     void Drift();
     void StopDrift();
-    void UpdateCheckpoint(bool IsSmart);
-    void CompleteLap(float);
-
-   
+    void UpdateCheckpoint(bool IsSmart);   
 
     FRotator DefaultCameraRotation;
     FRotator OriginalSpringArmRotation;
