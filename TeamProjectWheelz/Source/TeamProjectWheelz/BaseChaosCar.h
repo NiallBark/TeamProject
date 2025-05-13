@@ -24,7 +24,7 @@ protected:
     virtual void Tick(float DeltaTime) override;
 
     // Called when the game starts or when spawned
-    virtual void BeginPlay() override;
+    virtual void BeginPlay() override;	
 
     // AI Random Body Colour
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI");
@@ -118,10 +118,6 @@ protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Others")
     int BestLapTime = 0;
 
-    // Checkpoint Limit
-    UPROPERTY(EditAnywhere, Category = "Others")
-    int CheckpointLimit = 9;
-
     UPrimitiveComponent* CarRoot;
 
 private:
@@ -138,6 +134,7 @@ private:
 public:
     ABaseChaosCar();
     virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	void CompleteLap();
     bool CheckTeleportCooldown();
 
     // Car Inital Drift Friction
@@ -186,12 +183,20 @@ public:
     USceneComponent* BoostFXPosition;
 
     // Lap Counter
-    UPROPERTY(BlueprintReadWrite, Category = "Others")
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
     float LapCounter = 1;
+
+	// Lap Limit
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
+	float LapLimit = 3;
 
     // Checkpoint Counter
     UPROPERTY(EditAnywhere, Category = "Others")
     int CheckpointCounter = 0;
+
+    // Checkpoint Limit
+    UPROPERTY(EditAnywhere, Category = "Others")
+    int CheckpointLimit = 0;
 
 	// Race Position
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
@@ -212,6 +217,7 @@ public:
     // Distance to the next checkpoint
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Car")
     float DistanceToNextCheckpoint = 0.0f;
+
 
     // References to the spawned Niagara components
     UPROPERTY()
@@ -274,10 +280,7 @@ private:
     void ResetCameraRotation();
     void Drift();
     void StopDrift();
-    void UpdateCheckpoint(bool IsSmart);
-    void CompleteLap(float);
-
-   
+    void UpdateCheckpoint(bool IsSmart);   
 
     FRotator DefaultCameraRotation;
     FRotator OriginalSpringArmRotation;

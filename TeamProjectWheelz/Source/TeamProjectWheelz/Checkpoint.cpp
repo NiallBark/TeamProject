@@ -49,13 +49,33 @@ void ACheckpoint::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Ot
 		int LapCounter = Cast<ABaseChaosCar>(OtherActor)->LapCounter;
 		if (LapCounter >= 0)
 		{
-			Cast<ABaseChaosCar>(OtherActor)->UpdateCheckpointCounter(CheckpointNumber, MyBox->GetComponentLocation(), MyBox->GetComponentRotation());
-			Cast<ABaseChaosCar>(OtherActor)->StoredPosition = this->GetActorLocation();
-			Cast<ABaseChaosCar>(OtherActor)->StoredRotation = this->GetActorRotation();
+			//compare the checkpoint number with the base chaos car's checkpoint number
+			if (isLoop)
+			{
+				Cast<ABaseChaosCar>(OtherActor)->UpdateCheckpointCounter(CheckpointNumber, MyBox->GetComponentLocation(), MyBox->GetComponentRotation());
+				Cast<ABaseChaosCar>(OtherActor)->CompleteLap();
+				return;
+			}
+			else if (CheckpointNumber == Cast<ABaseChaosCar>(OtherActor)->CheckpointCounter || CheckpointNumber ==
+	(Cast<ABaseChaosCar>(OtherActor)->CheckpointCounter - 1) % Cast<ABaseChaosCar>(OtherActor)->CheckpointLimit || CheckpointNumber == (Cast<ABaseChaosCar>(OtherActor)->CheckpointCounter + 1) % Cast<ABaseChaosCar>(OtherActor)->CheckpointLimit)
+			{
+				//Debug show Checkpoint and CheckpointCounter
+				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Checkpoint: %d CheckpointCounter: %d"), CheckpointNumber, Cast<ABaseChaosCar>(OtherActor)->CheckpointCounter));
+				Cast<ABaseChaosCar>(OtherActor)->UpdateCheckpointCounter(CheckpointNumber, MyBox->GetComponentLocation(), MyBox->GetComponentRotation());
+				return;
+			}
+			else
+			{
+				//Debug show Checkpoint and CheckpointCounter
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Checkpoint: %d CheckpointCounter: %d"), CheckpointNumber, Cast<ABaseChaosCar>(OtherActor)->CheckpointCounter));
+				Cast<ABaseChaosCar>(OtherActor)->ResetCar();
+				return;
+			}
 		}
 		else
 		{
 			UE_LOG(LogTemp, Error, TEXT("LapCounter %d is out of bounds for RacePosition array"), LapCounter);
+			return;
 		}
 	}
 }

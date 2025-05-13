@@ -21,6 +21,7 @@ ABaseChaosCar::ABaseChaosCar()
     CarCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("CarCamera"));
     CarCamera->SetupAttachment(CarSpringArm, USpringArmComponent::SocketName); // Attach the camera to the end of the spring arm
     CarCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
+	
 
     // Set default camera rotation
     DefaultCameraRotation = FRotator(0.f, 0.f, 0.f);
@@ -93,116 +94,122 @@ void ABaseChaosCar::ResetCameraRotation()
 
 void ABaseChaosCar::Drift()
 {
-    if (!bIsDrifting)
+    if (WaitTimer <= 0)
     {
-        CurrentFriction = DriftFriction;
-    }
-
-    if (DriftTimer >= DriftMaxTime)
-    {
-        DriftTimer = DriftMaxTime;
-    }
-
-    FString ColorParameterName = "ColorMaximum";
-
-    // Activate or reactivate the NiagaraFX Components for Back Left Tire
-    if (BackLeftTireFX && BackLeftTireFXPosition)
-    {
-        if (!BackLeftTireFXComponent)
+        if (!bIsDrifting)
         {
-            BackLeftTireFXComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
-                BackLeftTireFX, BackLeftTireFXPosition, NAME_None, FVector::ZeroVector, 
-                FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset, true);
-
-            //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Spawning BackLeftTireFXComponent"));
-        }
-        else
-        {
-            BackLeftTireFXComponent->Activate(true);
-            //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Activating BackLeftTireFXComponent"));
+            CurrentFriction = DriftFriction;
         }
 
-        // Correct usage of FName
-        BackLeftTireFXComponent->SetNiagaraVariableLinearColor(ColorParameterName, ParticleColor);
-    }
-
-    // Activate or reactivate the NiagaraFX Components for Back Right Tire
-    if (BackRightTireFX && BackRightTireFXPosition)
-    {
-        if (!BackRightTireFXComponent)
+        if (DriftTimer >= DriftMaxTime)
         {
-            BackRightTireFXComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
-                BackRightTireFX, BackRightTireFXPosition, NAME_None, FVector::ZeroVector, 
-                FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset, true);
-
-            //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Spawning BackRightTireFXComponent"));
-        }
-        else
-        {
-            BackRightTireFXComponent->Activate(true);
-            //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Activating BackRightTireFXComponent"));
+            DriftTimer = DriftMaxTime;
         }
 
-        // Correct usage of FName
-        BackRightTireFXComponent->SetNiagaraVariableLinearColor(ColorParameterName, ParticleColor);
-    }
+        FString ColorParameterName = "ColorMaximum";
 
-    bIsDrifting = true;
+        // Activate or reactivate the NiagaraFX Components for Back Left Tire
+        if (BackLeftTireFX && BackLeftTireFXPosition)
+        {
+            if (!BackLeftTireFXComponent)
+            {
+                BackLeftTireFXComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
+                    BackLeftTireFX, BackLeftTireFXPosition, NAME_None, FVector::ZeroVector,
+                    FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset, true);
+
+                //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Spawning BackLeftTireFXComponent"));
+            }
+            else
+            {
+                BackLeftTireFXComponent->Activate(true);
+                //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Activating BackLeftTireFXComponent"));
+            }
+
+            // Correct usage of FName
+            BackLeftTireFXComponent->SetNiagaraVariableLinearColor(ColorParameterName, ParticleColor);
+        }
+
+        // Activate or reactivate the NiagaraFX Components for Back Right Tire
+        if (BackRightTireFX && BackRightTireFXPosition)
+        {
+            if (!BackRightTireFXComponent)
+            {
+                BackRightTireFXComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
+                    BackRightTireFX, BackRightTireFXPosition, NAME_None, FVector::ZeroVector,
+                    FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset, true);
+
+                //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Spawning BackRightTireFXComponent"));
+            }
+            else
+            {
+                BackRightTireFXComponent->Activate(true);
+                //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Activating BackRightTireFXComponent"));
+            }
+
+            // Correct usage of FName
+            BackRightTireFXComponent->SetNiagaraVariableLinearColor(ColorParameterName, ParticleColor);
+        }
+
+        bIsDrifting = true;
+    }
 }
 
 
 
 void ABaseChaosCar::StopDrift()
 {
-    bIsDrifting = false;
-    DriftCooldown = 0.0f;
-    bCanDrift = false;
-
-    if (CarRoot)
+	if (WaitTimer <= 0)
     {
-        // Check if the car is going backwards
-        if (GetVehicleMovement()->GetForwardSpeed() < 0)
+        bIsDrifting = false;
+        DriftCooldown = 0.0f;
+        bCanDrift = false;
+
+        if (CarRoot)
         {
-            // Reset the car's forward speed
-            CarRoot->SetPhysicsLinearVelocity(FVector::ZeroVector);
+            // Check if the car is going backwards
+            if (GetVehicleMovement()->GetForwardSpeed() < 0)
+            {
+                // Reset the car's forward speed
+                CarRoot->SetPhysicsLinearVelocity(FVector::ZeroVector);
+            }
+
+            // Halve the car's angular velocity
+            FVector CurrentAngularVelocity = CarRoot->GetPhysicsAngularVelocityInDegrees();
+            CarRoot->SetPhysicsAngularVelocityInDegrees(CurrentAngularVelocity * 0.5f);
+
+            // Apply forward force to the car
+            FVector ForwardForce = GetActorForwardVector() * 350.0f * (DriftTimer - (DisplaySpeed * 2));
+            CarRoot->AddImpulse(ForwardForce, NAME_None, true);
         }
 
-        // Halve the car's angular velocity
-        FVector CurrentAngularVelocity = CarRoot->GetPhysicsAngularVelocityInDegrees();
-        CarRoot->SetPhysicsAngularVelocityInDegrees(CurrentAngularVelocity * 0.5f);
-
-        // Apply forward force to the car
-        FVector ForwardForce = GetActorForwardVector() * 350.0f * (DriftTimer - (DisplaySpeed * 2));
-        CarRoot->AddImpulse(ForwardForce, NAME_None, true);
-    }
-
-    // Deactivate the NiagaraFX Components
-    if (BackLeftTireFXComponent)
-    {
-        BackLeftTireFXComponent->Deactivate();
-        BackLeftTireFXComponent = nullptr;
-        //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Deactivating BackLeftTireFXComponent"));
-    }
-
-    if (BackRightTireFXComponent)
-    {
-        BackRightTireFXComponent->Deactivate();
-        BackRightTireFXComponent = nullptr;
-        //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Deactivating BackRightTireFXComponent"));
-    }
-
-    // Activate the BoostFX Component if applicable
-    if (BoostFX && BoostFXPosition)
-    {
-        if (!BoostFXComponent)
+        // Deactivate the NiagaraFX Components
+        if (BackLeftTireFXComponent)
         {
-            BoostFXComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
-                BoostFX, BoostFXPosition, NAME_None, FVector::ZeroVector, 
-                FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset, true);
+            BackLeftTireFXComponent->Deactivate();
+            BackLeftTireFXComponent = nullptr;
+            //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Deactivating BackLeftTireFXComponent"));
         }
-        else
+
+        if (BackRightTireFXComponent)
         {
-            BoostFXComponent->Activate(true);
+            BackRightTireFXComponent->Deactivate();
+            BackRightTireFXComponent = nullptr;
+            //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Deactivating BackRightTireFXComponent"));
+        }
+
+        // Activate the BoostFX Component if applicable
+        if (BoostFX && BoostFXPosition)
+        {
+            if (!BoostFXComponent)
+            {
+                BoostFXComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
+                    BoostFX, BoostFXPosition, NAME_None, FVector::ZeroVector,
+                    FRotator::ZeroRotator, EAttachLocation::KeepRelativeOffset, true);
+            }
+            else
+            {
+                BoostFXComponent->Activate(true);
+            }
         }
     }
 
@@ -221,10 +228,6 @@ void ABaseChaosCar::UpdateCheckpoint(bool IsSmart)
             if (CheckpointCounter < CheckpointManager->SpawnedCheckpoints.Num() - 1)
             {
                 CheckpointCounter++;
-            }
-            else
-            {
-                CheckpointCounter = 0;
             }
         }
     }
@@ -246,20 +249,21 @@ void ABaseChaosCar::UpdateCheckpoint(bool IsSmart)
     }
 }
 
-void ABaseChaosCar::CompleteLap(float LapTime)
+void ABaseChaosCar::CompleteLap()
 {
-    if (LapCounter == 3)
+    CheckpointCounter = 0;
+    if (LapCounter == LapLimit)
     {
-        // Level Load
+		// Load Main Menu
+        UGameplayStatics::OpenLevel(GetWorld(), TEXT("StartMenu"));
     }
-    if (LapTime < BestLapTime || BestLapTime == 0)
+    if (InternalTimer < BestLapTime || BestLapTime == 0)
     {
-        BestLapTime = LapTime;
+        BestLapTime = InternalTimer;
     }
     LapCounter++;
     // New Lap Debug
 	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Lap %d Completed!"), LapCounter));
-    CheckpointCounter = 0;
     InternalTimer = 0;
 }
 
@@ -424,12 +428,6 @@ void ABaseChaosCar::Tick(float DeltaTime)
             DistanceToNextCheckpoint = FVector::Dist(Start, End);
         }
 
-        if (!IsAI)
-        {
-            // Print race position Debug
-            //GEngine->AddOnScreenDebugMessage(8, 5.f, FColor::Red, FString::Printf(TEXT("RacePosition: %d"), RacePosition));
-        }
-
         // AI Logic
         if (IsAI)
         {
@@ -557,7 +555,7 @@ void ABaseChaosCar::BeginPlay()
     if (CheckpointManager && CheckpointManager->SpawnedCheckpoints.Num() > 0)
     {
         CurrentCheckpoint = CheckpointManager->SpawnedCheckpoints[0];
-        CheckpointLimit = CheckpointManager->NumberOfCheckpoints;
+        CheckpointLimit = CheckpointManager->NumberOfCheckpoints -1;
         NextCheckpoint = CheckpointManager->SpawnedCheckpoints[1];
         if (IsAI && CurrentCheckpoint)
         {
@@ -607,29 +605,14 @@ bool ABaseChaosCar::CheckTeleportCooldown()
 
 void ABaseChaosCar::UpdateCheckpointCounter(int Checkpoint, FVector CheckpointRespawnPoint, FRotator CheckpointRespawnRotation)
 {
-    if (LapCounter == 3 && Checkpoint == 0)
+	if (!IsAI)
     {
-        // Load main menu level
+        // Debug show Checkpoint and CheckpointCounter
+        GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Checkpoint: %d CheckpointCounter: %d"), Checkpoint, CheckpointCounter));
     }
-
-    if (Checkpoint == (CheckpointCounter + 1) % CheckpointLimit || Checkpoint == (CheckpointCounter + 2) % CheckpointLimit)
-    {
-        if (CheckpointCounter >= CheckpointLimit - 1)
-        {
-            CompleteLap(InternalTimer);
-        }
-        else
-        {
-            CheckpointCounter = (CheckpointCounter + 1) % CheckpointLimit;
-        }
-    }
-    else if (Checkpoint == (CheckpointCounter + 1) % CheckpointLimit || Checkpoint == (CheckpointCounter + 2) % CheckpointLimit)
-    {
-        ResetCar();
-        UE_LOG(LogTemp, Warning, TEXT("Car is not in the correct checkpoint"));
-        // exit function
-        return;
-    }
+	CheckpointCounter = Checkpoint % CheckpointLimit;
+	StoredPosition = CheckpointRespawnPoint;
+	StoredRotation = CheckpointRespawnRotation;
     UpdateCheckpoint(IsAISmart);
 	ResetTimer = 10.0f;
 }

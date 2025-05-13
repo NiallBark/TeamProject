@@ -144,6 +144,9 @@ void ACheckpointManager::BeginPlay()
 		{
 		    // Add slot to the PositionChecker array
 		    PositionChecker.Add(FPositionChecker());
+
+			// Appply Lap Limit to the Car
+			Car->LapLimit = NumberOfLaps;
 		
 			FCarData CarData;
 			//Set CarID to the current index of the loop
@@ -210,8 +213,6 @@ void ACheckpointManager::Tick(float DeltaTime)
             if (CarDataArray.IsValidIndex(CarID))
             {
                 CarDataArray[CarID].Position = i + 1; // Set the RacePosition value
-				// Display the RacePosition value
-				GEngine->AddOnScreenDebugMessage(i, 5.f, FColor::Red, FString::Printf(TEXT("Car %d: %s is in position %d. At value: %d"), CarID, *CarDataArray[CarID].DriverName, CarDataArray[CarID].Position, CarDataArray[CarID].RacePositionValue));
             }
         }
     }
