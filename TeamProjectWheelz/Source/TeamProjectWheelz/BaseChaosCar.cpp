@@ -56,7 +56,7 @@ void ABaseChaosCar::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
     PlayerInputComponent->BindAction("Drift2", IE_Repeat, this, &ABaseChaosCar::Drift);
     PlayerInputComponent->BindAction("Drift2", IE_Pressed, this, &ABaseChaosCar::Drift);
     PlayerInputComponent->BindAction("Drift2", IE_Released, this, &ABaseChaosCar::StopDrift);
-    PlayerInputComponent->BindAction("Reset2", IE_Pressed, this, &ABaseChaosCar::ResetCar);
+    PlayerInputComponent->BindAction("Reset", IE_Pressed, this, &ABaseChaosCar::ResetCar);
     
 }
 
@@ -228,6 +228,8 @@ void ABaseChaosCar::UpdateCheckpoint(bool IsSmart)
             if (CheckpointCounter < CheckpointManager->SpawnedCheckpoints.Num() - 1)
             {
                 CheckpointCounter++;
+                // Set the next checkpoint to be the next one in the array after the current one
+                NextCheckpoint = CheckpointManager->SpawnedCheckpoints[CheckpointCounter + 1];
             }
         }
     }
@@ -251,20 +253,26 @@ void ABaseChaosCar::UpdateCheckpoint(bool IsSmart)
 
 void ABaseChaosCar::CompleteLap()
 {
-    CheckpointCounter = 0;
-    if (LapCounter == LapLimit)
+    // print checkpoint counter and checkpoint limit
+    //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("CheckpointCounter: %d CheckpointLimit: %d"), CheckpointCounter, CheckpointLimit));
+    if (ResetTimer <= 11.0f && CheckpointCounter >= (CheckpointLimit / 2))
     {
-		// Load Main Menu
-        UGameplayStatics::OpenLevel(GetWorld(), TEXT("StartMenu"));
+        CheckpointCounter = 0;
+        if (LapCounter == LapLimit)
+        {
+            // Load Main Menu
+            UGameplayStatics::OpenLevel(GetWorld(), TEXT("StartMenu"));
+        }
+        if (InternalTimer < BestLapTime || BestLapTime == 0)
+        {
+            BestLapTime = InternalTimer;
+        }
+        LapCounter++;
+        // New Lap Debug
+        //GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Lap %d Completed!"), LapCounter));
+        InternalTimer = 0;
+        ResetTimer = 15.0f;
     }
-    if (InternalTimer < BestLapTime || BestLapTime == 0)
-    {
-        BestLapTime = InternalTimer;
-    }
-    LapCounter++;
-    // New Lap Debug
-	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Lap %d Completed!"), LapCounter));
-    InternalTimer = 0;
 }
 
 
@@ -429,9 +437,12 @@ void ABaseChaosCar::Tick(float DeltaTime)
         }
 
         // AI Logic
+        if (ResetTimer > 0)
+        {
+            ResetTimer -= DeltaTime;
+        }
         if (IsAI)
         {
-			ResetTimer -= DeltaTime;
 			if (ResetTimer <= 0)
 			{
 				ResetCar();
@@ -605,21 +616,25 @@ bool ABaseChaosCar::CheckTeleportCooldown()
 
 void ABaseChaosCar::UpdateCheckpointCounter(int Checkpoint, FVector CheckpointRespawnPoint, FRotator CheckpointRespawnRotation)
 {
-	if (!IsAI)
+    if (Checkpoint != 0)
     {
-        // Debug show Checkpoint and CheckpointCounter
-        GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Checkpoint: %d CheckpointCounter: %d"), Checkpoint, CheckpointCounter));
+        CheckpointCounter = Checkpoint;
     }
-	CheckpointCounter = Checkpoint % CheckpointLimit;
 	StoredPosition = CheckpointRespawnPoint;
 	StoredRotation = CheckpointRespawnRotation;
     UpdateCheckpoint(IsAISmart);
-	ResetTimer = 10.0f;
+    if (ResetTimer < 10.0f)
+    {
+        ResetTimer = 10.0f;
+    }
 }
 
 void ABaseChaosCar::ResetCar()
 {
-	ResetTimer = 10.0f;
+    if (ResetTimer < 10.0f)
+    {
+        ResetTimer = 10.0f;
+    }
     // Teleport the car to the target actor's location and rotation
     CarRoot->SetWorldLocation(StoredPosition, false, nullptr, ETeleportType::TeleportPhysics);
     CarRoot->SetWorldRotation(StoredRotation, false, nullptr, ETeleportType::TeleportPhysics);

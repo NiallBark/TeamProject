@@ -141,7 +141,6 @@ public:
     UPROPERTY(EditAnywhere, Category = "Car")
     float DriftFriction = 1.0f;
 
-
     // Car Drifting Friction
     UPROPERTY(EditAnywhere, Category = "Car")
     float DriftingFriction = 2.0f;
@@ -245,6 +244,8 @@ public:
 
     // Checkpoint Number / Position /
     virtual void UpdateCheckpointCounter(int Checkpoint, FVector RespawnPoint, FRotator RespawnRotation);
+	
+	void UpdateCheckpoint(bool IsSmart);  
     
     // Expose Turning function to Blueprints
     UFUNCTION(BlueprintCallable, Category = "Car")
@@ -265,9 +266,9 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI");
     bool IsAISmart = false;
 
-    // AI Check
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
-    bool IsAI = false;
+	// AI Check
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
+	bool IsAI = false;
 
     // Reset Car with both position and rotation
     UFUNCTION(BlueprintCallable, Category = "Car")
@@ -280,7 +281,6 @@ private:
     void ResetCameraRotation();
     void Drift();
     void StopDrift();
-    void UpdateCheckpoint(bool IsSmart);   
 
     FRotator DefaultCameraRotation;
     FRotator OriginalSpringArmRotation;

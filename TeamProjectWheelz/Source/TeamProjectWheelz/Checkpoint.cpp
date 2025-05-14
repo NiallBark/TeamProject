@@ -57,17 +57,26 @@ void ACheckpoint::OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Ot
 				return;
 			}
 			else if (CheckpointNumber == Cast<ABaseChaosCar>(OtherActor)->CheckpointCounter || CheckpointNumber ==
-	(Cast<ABaseChaosCar>(OtherActor)->CheckpointCounter - 1) % Cast<ABaseChaosCar>(OtherActor)->CheckpointLimit || CheckpointNumber == (Cast<ABaseChaosCar>(OtherActor)->CheckpointCounter + 1) % Cast<ABaseChaosCar>(OtherActor)->CheckpointLimit)
+	(Cast<ABaseChaosCar>(OtherActor)->CheckpointCounter + 1) || CheckpointNumber == (Cast<ABaseChaosCar>(OtherActor)->CheckpointCounter + 2))
 			{
+				if (!Cast<ABaseChaosCar>(OtherActor)->IsAI)
+				{
+					//Debug show Checkpoint and CheckpointCounter
+					//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Checkpoint: %d CheckpointCounter: %d"), CheckpointNumber, Cast<ABaseChaosCar>(OtherActor)->CheckpointCounter));
+				}
 				//Debug show Checkpoint and CheckpointCounter
 				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("Checkpoint: %d CheckpointCounter: %d"), CheckpointNumber, Cast<ABaseChaosCar>(OtherActor)->CheckpointCounter));
 				Cast<ABaseChaosCar>(OtherActor)->UpdateCheckpointCounter(CheckpointNumber, MyBox->GetComponentLocation(), MyBox->GetComponentRotation());
 				return;
 			}
+			else if (CheckpointNumber == Cast<ABaseChaosCar>(OtherActor)->CheckpointCounter - 1)
+			{
+				return;
+			}
 			else
 			{
 				//Debug show Checkpoint and CheckpointCounter
-				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Checkpoint: %d CheckpointCounter: %d"), CheckpointNumber, Cast<ABaseChaosCar>(OtherActor)->CheckpointCounter));
+				//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Checkpoint: %d CheckpointCounter: %d"), CheckpointNumber, Cast<ABaseChaosCar>(OtherActor)->CheckpointCounter));
 				Cast<ABaseChaosCar>(OtherActor)->ResetCar();
 				return;
 			}
