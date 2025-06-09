@@ -238,7 +238,7 @@ public:
                                                 TEXT("Tiny Turtleeee"),
                                                 TEXT("Sunny Bunny"),
                                                 TEXT("Crimson Imp"),
-                                                TEXT("Null 1551")
+                                                TEXT("Null 1551"),
                                                 TEXT("Big Mon D"),
                                                 TEXT("D_E_B_A_N"),
                                                 TEXT("GR Fournd"),

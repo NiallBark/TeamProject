@@ -100,7 +100,7 @@ protected:
 
     // Drift Max Time
     UPROPERTY(BlueprintReadOnly, Category = "Car")
-    float DriftMaxTime = 1.5f;
+    float DriftMaxTime = 5.0f;
 
     // Car Current Friction
     UPROPERTY(BlueprintReadOnly, Category = "Car")
@@ -183,11 +183,11 @@ public:
 
     // Lap Counter
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
-    float LapCounter = 1;
+    int LapCounter = 1;
 
 	// Lap Limit
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
-	float LapLimit = 3;
+	int LapLimit = 3;
 
     // Checkpoint Counter
     UPROPERTY(EditAnywhere, Category = "Others")
@@ -200,6 +200,10 @@ public:
 	// Race Position
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
 	int RacePosition = 0;
+
+	// Race Position Value
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")
+	int PositionValue = 0;
 
     // Respawn Point
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car")

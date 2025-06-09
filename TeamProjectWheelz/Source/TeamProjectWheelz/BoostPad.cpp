@@ -19,7 +19,7 @@ void ABoostPad::BeginPlay()
 {
 	Super::BeginPlay();
 	MyBox->OnComponentBeginOverlap.AddDynamic(this, &ABoostPad::OnOverlap);
-	MyBox->SetHiddenInGame(false);		
+	MyBox->SetHiddenInGame(false);
 }
 
 // Called every frame

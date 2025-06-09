@@ -12,9 +12,9 @@ public class TeamProjectWheelz : ModuleRules
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
-        PublicIncludePaths.AddRange(new string[] {"TeamProjectWheelz/Public","ChaosVehicles/Public"});
+        //PublicIncludePaths.AddRange(new string[] {"TeamProjectWheelz/Public","ChaosVehicles/Public"});
 
-        PrivateIncludePaths.AddRange(new string[] {"TeamProjectWheelz/Private","ChaosVehicles/Private"});
+        //PrivateIncludePaths.AddRange(new string[] {"TeamProjectWheelz/Private","ChaosVehicles/Private"});
 
 
 
